@@ -21,11 +21,90 @@ img {
   max-width: 100%;
 }
 
-
-/* !!!!!!!!!!!
------------------------------------- */
-
-h1{
-  color:red;
+/* 最大幅と余白の調整 */
+.wrapper{
+  max-width: 1100px;
+  margin: 0 auto;     /* 中央寄せ */
+  padding: 0 4%;
 }
 
+/* ヘッダー
+------------------------------------ */
+/* ロゴとメニュを横並びにする */
+.page-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo{
+  width: 100px;
+  margin-top: 14px;
+}
+
+/* メニューを横並びにする */
+.main-nav{
+  display: flex;
+  font-size: 1.25rem;
+  text-transform: uppercase;  /* 英大文字 */
+  margin-top: 34px;
+  list-style: none;           /* リストの・マークを表示しない */
+}
+
+.main-nav li{
+  margin-left: 36px;
+}
+
+/* ナビゲーションメニュはマウスオーバーで色を変更 */
+.main-nav a:hover{
+  color:#0bd;
+}
+
+/* HOME
+------------------------------------ */
+/* 背景画像 */
+.big-bg{
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+#home{
+  background-image: url(./images/bg1.jpg);
+  min-height: 100vh;
+}
+
+#home .page-title{
+  text-transform: none;
+}
+
+/* 中央寄せ */
+.home-content{
+  text-align: center;
+  margin-top: 10%;
+}
+/* キャッチコピー */
+.page-title{
+  font-size:5rem;
+  font-family: 'Philosopher', serif;
+  text-transform: uppercase;
+  text-shadow:1px 1px 3px #fff;  /* 文字に影をつける */
+  font-weight: normal;
+}
+
+
+/* ABOUT
+------------------------------------ */
+/* PLAN
+------------------------------------ */
+/* ACCESS
+------------------------------------ */
+/* ご予約
+------------------------------------ */
+/* SNS
+------------------------------------ */
+
+/* レスポンシブ（スマホ）対応
+------------------------------------ */
+@media screen and (max-width:600) {
+
+}
