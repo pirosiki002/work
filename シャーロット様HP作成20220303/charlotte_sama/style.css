@@ -1,0 +1,31 @@
+@charset "UTF-8"; /* 文字化け防止 */
+
+
+/* 共通部分
+------------------------------------ */
+html{
+  font-size:100%;
+}
+
+body{
+  font-family: "Yu Gothic Medium", YuGothic, "遊ゴシック体", "ヒラギノ角ゴ Pro W3", sans-serif;
+  line-height: 1.7;
+  color:#432;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+/* !!!!!!!!!!!
+------------------------------------ */
+
+h1{
+  color:red;
+}
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./stylesheet.css">
+        <title>ABC Camp</title>
+        <link rel="icon" href="./logo.png">
+    </head>
+    <header>
+        <!-- site name -->
+        <div class = "logo">
+            <img src="./logo.png" alt="logo">
+        </div>
+        <nav class="pc_nav">
+            <ul>
+                <li><a href="#slide">トップ</a></li>
+                <li><a href="#about_site">このサイトについて</a></li>
+                <li><a href="#introduce">私たちについて</a></li>
+                <li><a href="#portfolio">ポートフォリオ</a></li>
+                <li><a href="#access">アクセス</a></li>
+                <li><a href="#form">お問合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <body>
+        <!-- main -->
+        <div class="slide" id ="slide">
+            <a class = "anchor"></a>
+            <img src="./img/IMG_0100.JPG" alt="Picture1">
+            <img src="./img/IMG_0101.JPG" alt="Picture2">
+            <img src="./img/IMG_0106.JPG" alt="Picture3">
+        </div>
+        <div class ="main_visual" id ="main_visual">
+            <div class ="l_chart">
+                <img src="./logo.png" alt="ABC camp">
+            </div>
+            <div class ="main_title">
+                <h2>ABC Camp</h2>
+            </div>
+        </div> 
+        <div class = "about_site anchor" id ="about_site">
+            <div class ="a_s_title">
+                <a class = "anchor"></a>
+                <h2>About this site</h2>
+            </div>
+            <div class ="a_s_exp">
+                <p>ここはABC Campの公式ホームページです。<br>
+                    どうぞゆっくりしていってくださいね！
+                </p>
+            </div>
+        </div>
+        <div class ="introduce" id ="introduce">
+            <div class ="intr_title">
+                <a class = "anchor"></a>
+                <h2>About us</h2>
+            </div>
+            <div class ="intr_exp">
+                <p>キャンプ場の提供を行なっております。<br>お客様が気持ちよく利用できるように、心を込めておもてなしをいたします。</p>
+            </div>
+        </div>
+        <div class ="portfolio" id = "portfolio">
+            <div class = "port_title">
+                <!-- <a class = "anchor"></a> -->
+                <h2>ポートフォリオ</h2>
+            </div>
+            <p>製作物</p>
+            <div class ="port_product">
+                <div class="product-mamaleaf">
+                    <p><a href="https://otayoly.app/">MamaLeaf 株式会社 様</a></p>
+                    <p>(Wordpress)</p>
+                </div>
+                <div class="product-repair">
+                    <p>業務改善プログラム２件（公開不可）</p>
+                    <p>(VBA)</p>
+                </div>
+            </div>
+            <div class ="access" id="access">
+                <a class = "anchor"></a>
+                <h2>アクセス</h2>
+                <p>〒869-2221 熊本県阿蘇市</p>
+            </div>
+            <div class ="map">
+                <!-- <img src="chart.png"> -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13399.948964751777!2d131.07872063108186!3d32.89850559496576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3540d87b844258f9%3A0x374a44e66d271103!2z6Zi_6JiH5bGx!5e0!3m2!1sja!2sjp!4v1646274673604!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <form method="post" target="hidden_iframe" onsubmit="submitted=true;" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeVl0N8qFDPhXYU5RHy0G6SLp7spwsfZrxJRnJFxSXcBBQDTQ/formResponse">
+            <div class="Form" id="form">
+                <div class="Form-Title">
+                    <a class = "anchor"></a>
+                    <h2>お問い合わせ</h2>
+                    <p>お気軽にお問い合わせくださいませ。</p>
+                </div>
+                <div class="Form-Item">
+                    <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>氏名</p>
+                    <input type="text" name="entry.462154011" class="Form-Item-Input" placeholder="例）山田太郎" required="">
+                </div>
+                <div class="Form-Item">
+                    <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
+                    <input type="email" name="entry.798130987" class="Form-Item-Input" placeholder="例）example@gmail.com" required="">
+                </div>
+                <div class="Form-Item">
+                    <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
+                    <textarea class="Form-Item-Textarea" name="entry.844631762"required=""></textarea>
+                </div>
+                <input type="submit" name="button" class="Form-Btn" value="送信する">
+            </div>
+        </form>
+    </body>
+</html>
