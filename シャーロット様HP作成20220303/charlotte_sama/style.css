@@ -91,17 +91,161 @@ img {
   font-weight: normal;
 }
 
+/* 各コンテンツ共通
+------------------------------------ */
+.contents h2{
+  font-size:3rem;
+  font-family: 'Philosopher', serif;
+  text-shadow:1px 1px 3px #fff;
+  font-weight: normal;
+}
+
+.contents p{
+  font-size:1rem;
+  font-family: 'Philosopher', serif;
+  font-weight: normal;
+}
 
 /* ABOUT
 ------------------------------------ */
+.about-content{
+  margin: 200px;
+  text-align: center;
+}
+
 /* PLAN
 ------------------------------------ */
+.plan-content{
+  margin-bottom: 200px;
+}
+
+.plan-content h2{
+  text-align: center;
+}
+
+.plan-content h3{
+  font-size:1.5rem;
+  font-family: 'Philosopher', serif;
+  text-transform: uppercase;
+  text-shadow:1px 1px 3px #fff;
+  font-weight: normal;
+}
+
+.plan-content p{
+  margin-top: 20px;
+}
+
+.plan-content li {
+  margin-top: 40px;
+  display: flex;
+}
+
+.plan-content li:nth-child(even) {
+	flex-direction: row-reverse;
+}
+
+.plan-content img{
+  height: 320px;
+  width: 100%;
+}
+
+.resort-stay{
+  width: 50%;
+  padding-right: 40px;
+}
+
+.workation{
+  width: 50%;
+  padding-left: 40px;
+}
+
 /* ACCESS
 ------------------------------------ */
+.access-content{
+  text-align: center;
+  margin-bottom: 200px;
+}
+
+.access-content p{
+  margin-bottom: 20px;
+}
+
 /* ご予約
 ------------------------------------ */
+.reserve-content{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 200px;
+}
+
+.reserve-content h2{
+  font-size:2.5rem; /* 英語より日本語の方が大きいため、サイズ微調整 */
+  margin-bottom: 20px;
+}
+
+
+/* ボタンデザイン */
+.reserve-content a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1em 2em;
+  width: 300px;
+  color:  #432;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid  #432;
+}
+
+.reserve-content a::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #432;
+  border-right: 3px solid #432;
+  transform: rotate(45deg);
+}
+
+.reserve-content a:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: #a0c4d3;
+}
+
+.reserve-content a:hover::after {
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+}
+
+
 /* SNS
 ------------------------------------ */
+.sns-content{
+  padding:  30px 150px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sns-content h2{
+  border-bottom: 2px solid #0bd;
+  margin-bottom: 20px;
+}
+
+
+/* フッター
+------------------------------------ */
+footer{
+  background: #432;
+  text-align: center;
+  padding: 26px 0;
+  margin-top: 50px;
+}
+footer p{
+  color: #fff;
+  font-size: 0.875rem;
+}
 
 /* レスポンシブ（スマホ）対応
 ------------------------------------ */
