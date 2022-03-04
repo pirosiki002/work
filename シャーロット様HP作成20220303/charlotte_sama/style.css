@@ -91,6 +91,12 @@ img {
   font-weight: normal;
 }
 
+.home-content p{
+  font-size:1.5rem;
+  font-family: 'Philosopher', serif;
+}
+
+
 /* 各コンテンツ共通
 ------------------------------------ */
 .contents h2{
@@ -109,7 +115,8 @@ img {
 /* ABOUT
 ------------------------------------ */
 .about-content{
-  margin: 200px;
+  margin-top: 200px;
+  margin-bottom: 200px;
   text-align: center;
 }
 
