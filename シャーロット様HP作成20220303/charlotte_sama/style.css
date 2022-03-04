@@ -69,7 +69,7 @@ img {
 }
 
 #home{
-  background-image: url(./images/bg1.jpg);
+  /* background-image: url(./images/bg1.jpg); */
   min-height: 100vh;
 }
 
@@ -79,23 +79,72 @@ img {
 
 /* 中央寄せ */
 .home-content{
+  position: relative;
   text-align: center;
-  margin-top: 10%;
 }
+
 /* キャッチコピー */
 .page-title{
+  position: absolute; /* 文字の位置はHomeに合わせる */
   font-size:5rem;
   font-family: 'Philosopher', serif;
   text-transform: uppercase;
   text-shadow:1px 1px 3px #fff;  /* 文字に影をつける */
   font-weight: normal;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,50%);
+  margin:0;
+  padding:0;  
+  z-index: 10;  /* 優先順位をスライドショーより高くする */
+  opacity: 1;   /* 透明度０=常に表示 */
 }
 
-.home-content p{
-  font-size:1.5rem;
-  font-family: 'Philosopher', serif;
+/* スライドショー */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  z-index: 1;
 }
 
+@keyframes slideshow{
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  28%{
+    opacity: 1
+  }
+  38%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+.slide img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation :slideshow 24s linear infinite;
+}
+
+.slide img:nth-child(2){
+  animation-delay: 8s;
+}
+
+.slide img:last-child{
+  animation-delay: 16s;
+}
 
 /* 各コンテンツ共通
 ------------------------------------ */
@@ -115,8 +164,8 @@ img {
 /* ABOUT
 ------------------------------------ */
 .about-content{
-  margin-top: 200px;
-  margin-bottom: 200px;
+  margin-top: 400px;
+  margin-bottom: 400px;
   text-align: center;
 }
 
