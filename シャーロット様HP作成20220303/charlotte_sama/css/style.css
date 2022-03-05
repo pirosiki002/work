@@ -179,8 +179,8 @@ img {
 /* ABOUT
 ------------------------------------ */
 .about-content{
-  margin-top: 400px;
-  margin-bottom: 400px;
+  margin-top: 150px;
+  margin-bottom: 150px;
   text-align: center;
 }
 .about-content img{
@@ -196,7 +196,7 @@ img {
 /* PLAN
 ------------------------------------ */
 .plan-content{
-  margin-bottom: 200px;
+  margin-bottom: 150px;
 }
 
 .plan-content h2{
@@ -249,7 +249,7 @@ img {
 ------------------------------------ */
 .access-content{
   text-align: center;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 .access-content p{
@@ -267,7 +267,7 @@ img {
 .reserve-content{
   width: 100%;
   text-align: center;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 .reserve-content h2{
