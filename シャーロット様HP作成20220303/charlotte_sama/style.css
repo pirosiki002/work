@@ -64,6 +64,10 @@ img {
   margin-left: 36px;
 }
 
+.main-nav a{
+  color:#432;
+}
+
 /* ナビゲーションメニュはマウスオーバーで色を変更 */
 .main-nav a:hover{
   color:#0bd;
@@ -72,14 +76,7 @@ img {
 /* HOME
 ------------------------------------ */
 /* 背景画像 */
-.big-bg{
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-
 #home{
-  /* background-image: url(./images/bg1.jpg); */
   min-height: 100vh;
 }
 
@@ -190,6 +187,12 @@ img {
   margin-top: 40px;
 }
 
+/* メニューリンク位置調整 */
+#about-link{
+  padding-top:120px;
+  margin-top:-120px;
+}
+
 /* PLAN
 ------------------------------------ */
 .plan-content{
@@ -236,6 +239,12 @@ img {
   padding-left: 40px;
 }
 
+/* メニューリンク位置調整 */
+#plan-link{
+  padding-top:120px;
+  margin-top:-120px;
+}
+
 /* ACCESS
 ------------------------------------ */
 .access-content{
@@ -245,6 +254,12 @@ img {
 
 .access-content p{
   margin-bottom: 20px;
+}
+
+/* メニューリンク位置調整 */
+#access-link{
+  padding-top:120px;
+  margin-top:-120px;
 }
 
 /* ご予約
@@ -295,6 +310,11 @@ img {
   border-right: 3px solid #333333;
 }
 
+/* メニューリンク位置調整 */
+#reserve-link{
+  padding-top:120px;
+  margin-top:-120px;
+}
 
 /* SNS
 ------------------------------------ */
