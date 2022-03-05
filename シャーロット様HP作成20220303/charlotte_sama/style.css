@@ -139,7 +139,6 @@ img {
   animation :slideshow 15s linear infinite;
 }
 
-
 /* アニメーションの開始時間 */
 .slide img:nth-child(2){
   animation-delay: 3s;
@@ -153,8 +152,6 @@ img {
 .slide img:nth-child(5){
   animation-delay: 12s;
 }
-
-
 
 /* 各コンテンツ共通
 ------------------------------------ */
@@ -287,18 +284,76 @@ img {
 
 /* SNS
 ------------------------------------ */
-.sns-content{
+/* .sns-content{
   padding:  30px 150px;
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
+} */
 
-.sns-content h2{
+/* .sns-content h2{
   border-bottom: 2px solid #0bd;
   margin-bottom: 20px;
+} */
+
+/* ボタン全体 */
+.flowbtn12{
+  font-family:'Verdana',sans-serif;	
+  border-radius: 4px;
+  display:inline-block;
+  width:90%;
+  font-size:20px;
+  transition:.4s;	
+  text-decoration:none;
+}
+/* ボタン内テキストマウスホバー時 */
+.flowbtn12:hover{
+color:#fff!important;
+text-decoration:none;
+}
+/* Twitter */
+.flowbtn12.fl_tw2{
+border:solid 1px #55acee;
+color:#55acee;
+}
+/* Twitterマウスホバー時 */
+.flowbtn12.fl_tw2:hover{
+border:solid 1px #55acee;
+background:#55acee;
+}
+/* Instagram */
+.flowbtn12.insta_btn2{
+  border:solid 1px #c6529a;
+  color:#c6529a;
+}
+/* Instagramマウスホバー時 */
+.flowbtn12.insta_btn2:hover{
+  border:solid 1px #c6529a;
+  background:#c6529a;
 }
 
+/* ボタン内テキスト調整 */
+.flowbtn12 span{
+  font-size:14px;	
+  position:relative;
+  left:8px;
+  bottom:2px;	
+}
+/* ulタグの内側余白を０にする */
+ul.snsbtniti2{
+  padding:0!important;
+}
+/* ボタン全体の位置 */
+.snsbtniti2{
+  display:flex;
+  flex-flow:row wrap;
+}
+/* ボタン同士の余白 */
+.snsbtniti2 li{
+  flex:0 0 48%;
+  text-align:center !important;
+  list-style: none;
+}
 
 /* フッター
 ------------------------------------ */
