@@ -95,7 +95,7 @@ img {
   left:50%;
   transform: translate(-50%,50%);
   margin:0;
-  padding:0;  
+  padding:0;
   z-index: 10;  /* 優先順位をスライドショーより高くする */
   opacity: 1;   /* 透明度０=常に表示 */
 }
@@ -371,6 +371,7 @@ ul.snsbtniti2{
   position: relative;
 }
 
+/* 右側に固定 */
 .gotop{
   position: fixed;
   bottom: 20px;
@@ -392,6 +393,7 @@ ul.snsbtniti2{
   position: absolute;
   transform: rotate(-45deg);
 }
+
 .gotop:hover{
   opacity: 1;
 }
@@ -411,6 +413,32 @@ footer p{
 
 /* レスポンシブ（スマホ）対応
 ------------------------------------ */
-@media screen and (max-width:600) {
+@media screen and (max-width:600px) {
+
+  /* HOME
+  ------------------------------------ */
+  /* キャッチコピー */
+  .page-title{
+    font-size:3rem;                    /* 文字サイズを調整 */
+    transform: translate(-50%,130%);   /* 文字の位置を調整 */
+  }
+
+  /* PLAN
+  ------------------------------------ */
+  .plan-content li {
+    display: inline-block;
+  }
+
+  .resort-stay{
+    width: 100%;
+    text-align: center;
+    padding-right: 0px; /* 右の幅をリセット */
+  }
+
+  .workation{
+    width: 100%;
+    text-align: center;
+    padding-left: 0px;
+  }
 
 }
