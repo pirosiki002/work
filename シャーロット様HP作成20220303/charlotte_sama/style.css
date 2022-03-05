@@ -175,6 +175,9 @@ img {
   margin-bottom: 400px;
   text-align: center;
 }
+.about-content img{
+  margin-top: 40px;
+}
 
 /* PLAN
 ------------------------------------ */
