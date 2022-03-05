@@ -34,11 +34,20 @@ img {
 .page-header{
   display: flex;
   justify-content: space-between;
+  background-color: #fff;
+  width: 100%;
+  /* トップに固定し、常に表示 */
+  position: fixed; /* ポジションを固定する */
+  top: 0px;        /*一番上に設置*/
+  left: 0px;
+  z-index: 9999;   /*どの要素よりも上にくるように*/
+
 }
 
 .logo{
   width: 100px;
   margin-top: 14px;
+  margin-left: 30px;
 }
 
 /* メニューを横並びにする */
@@ -47,6 +56,7 @@ img {
   font-size: 1.25rem;
   text-transform: uppercase;  /* 英大文字 */
   margin-top: 34px;
+  margin-right:30px;
   list-style: none;           /* リストの・マークを表示しない */
 }
 
@@ -102,6 +112,7 @@ img {
 
 /* スライドショー */
 .slide {
+  margin-top: 120px;  /* メニューバーとの位置調整 */
   position: relative;
   width: 100%;
   height: 600px;
