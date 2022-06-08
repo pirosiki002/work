@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/* fontはgoogleFontからもってくる */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
 /* common
 ---------------------------------------*/
@@ -7,7 +9,6 @@ html {
 }
 
 body{
-  /* fontはgoogleFontからもってくる */
   font-family: 'Noto Sans JP', sans-serif;
   line-height: 1.7;
   color:black;
@@ -23,6 +24,15 @@ img{
 
 /* header
 ---------------------------------------*/
+.page-header{
+  border-bottom: 2px solid black;
+}
+
+.page-header h1{
+  font-size: 3rem;
+  font-weight: 900;
+}
+
 .logo{
   width: 210px;
   margin-top: 14px;
@@ -33,6 +43,7 @@ img{
   font-size: 1.25rem;
   text-transform: uppercase;
   margin-top: 34px;
+  margin-bottom: 10px;
   list-style: none;
 }
 
@@ -57,4 +68,21 @@ img{
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 4%;
+}
+
+/* main-catch-copy
+---------------------------------------*/
+.main-catch-copy{
+  position: relative;
+}
+
+.main-catch-copy p{
+  position: absolute;
+  color: white;
+  top:0;
+  left:0;
+}
+
+.main-catch-copy img{
+  width: 100%;
 }
