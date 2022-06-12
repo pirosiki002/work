@@ -125,9 +125,8 @@ img{
   justify-content: center;
 }
 
-.icon{
-  height: 4%;
-  width: 4%;
+.company .icon{
+  width:40px; /* iconの幅は固定 */
 }
 
 .category-explain{
