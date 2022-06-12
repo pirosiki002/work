@@ -6,36 +6,53 @@
     <meta name="description" content="合同会社YUKIのホームページです">
     <!-- CSS -->
     <link rel = "stylesheet" href = "https://unpkg.com/ress/dist/ress.min.css">
-    <link href="./text.css" rel ="stylesheet">
+    <link href="./test.css" rel ="stylesheet">
   </head>
   <body>
-    <!-- form cp start -->
-    <section id="contact">
-      <h1 class="section-header">Contact</h1>
-      <div class="contact-wrapper">
-      <!-- Left contact page --> 
-        <form id="contact-form" class="form-horizontal" role="form">
-          <div class="form-group">
-            <div class="col-sm-12">
-              <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="" required>
-            </div>
-          </div>
-          <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea>
-          <button class="btn btn-primary send-button" id="submit" type="submit" value="SEND">
-            <div class="alt-send-button">
-              <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
-            </div>
-          </button>
-        </form>
-      <!-- Left contact page -->
-    </section>
-    <!-- javascript import -->
+  <!--form cp start-->
+  <p style="text-align: center; margin: 40px auto">
+    お気軽にお問い合わせください。
+  </p>
+  <form class="c-form">
+    <div class="c-form__item">
+      <!-- <label class="c-form__label" for="field-name"
+        >名前・会社名<span class="c-form__required">必須</span></label
+      > -->
+      <input
+        class="c-form__input"
+        id="field-name"
+        placeholder="お名前"
+        type="text"
+        required="required"
+      />
+    </div>
+    <div class="c-form__item">
+      <!-- <label class="c-form__label" for="field-mail"
+        >メールアドレス<span class="c-form__required">必須</span></label
+      > -->
+      <input
+        class="c-form__input"
+        id="field-mail"
+        placeholder="メール"
+        type="email"
+        required="required"
+      />
+    </div>
+    <div class="c-form__item">
+      <!-- <label class="c-form__label" for="field-message">メッセージ内容</label> -->
+      <textarea
+        class="c-form__input"
+        id="field-message"
+        placeholder="お問い合わせ内容"
+      ></textarea>
+    </div>
+    <div class="c-form__submit">
+      <button type="submit">送信する</button>
+    </div>
+  </form>
+  <!--form cp end-->
+  <!-- javascript import -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="./text.js"></script>
+    <script type="text/javascript" src="./test.js"></script>
   </body>
 </html>
