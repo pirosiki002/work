@@ -49,9 +49,9 @@ img{
 
 .main-nav{
   display: flex;
-  font-size: 1.25rem;
+  font-size: 1.00rem;
   text-transform: uppercase;
-  margin-top: 50px;
+  margin-top: 55px;
   margin-bottom: 10px;
   list-style: none;
 }
@@ -81,6 +81,10 @@ img{
 
 /* main-catch-copy
 ---------------------------------------*/
+.main{
+  text-align: center;
+}
+
 .main-catch-copy{
   margin-top: 60px;
   position: relative;
@@ -105,7 +109,8 @@ img{
   /* 拡大・縮小を上手にやりたい*/
   /* height: 500px; */
   height: 500px;
-  width: 100%;
+  width: 90%;
+  border-radius: 30px;
 }
 
 /* company
@@ -133,4 +138,5 @@ img{
   margin-top: 20px;
   height: 50%;
   width: 50%;
+  border-radius: 10px;
 }
