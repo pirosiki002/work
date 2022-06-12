@@ -140,3 +140,67 @@ img{
   width: 50%;
   border-radius: 10px;
 }
+
+/* form
+---------------------------------------*/
+/* form cp start */
+.c-form {
+	max-width: 600px;
+	margin: 0 auto;
+}
+.c-form__item {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin-bottom: 20px;
+}
+.c-form__input {
+	padding: 10px;
+}
+.c-form__input {
+	width: 90%;
+	font-size: 16px;
+	border: solid 1px #333;
+	border-radius: 4px;
+}
+.c-form__input:focus-visible {
+	outline: gray auto 1px;
+}
+.c-form__required {
+	color: #fff;
+	background-color: gray;
+	border-radius: 4px;
+	padding: 5px 5px;
+	margin: 0 0 0 18px;
+}
+textarea.c-form__input {
+	height: 160px;
+}
+.c-form__submit {
+	text-align: center;
+}
+.c-form__submit button {
+	font-size: 18px;
+	color: #fff;
+	background-color: black;
+	border: solid 1px white;
+	border-radius: 4px;
+	padding: 5px 32px;
+	transition: 0.4s;
+	cursor: pointer;
+}
+.c-form__submit button:hover {
+	color: gray;
+	background-color: transparent;
+}
+
+@media (min-width: 640px) {
+	.c-form__item {
+		flex-wrap: nowrap;
+	}
+	.c-form__input {
+		width: 55%;
+	}
+}
+
+/* form cp end */
