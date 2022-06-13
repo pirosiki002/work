@@ -203,3 +203,17 @@ textarea.c-form__input {
 }
 
 /* form cp end */
+
+/* footer
+---------------------------------------*/
+footer{
+  background: black;
+  text-align: center;
+  padding: 26px 0;
+  margin-top: 50px;
+}
+
+footer p{
+  color: #fff;
+  font-size: 0.875rem;
+}
