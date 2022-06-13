@@ -22,15 +22,6 @@ img{
   max-width: 100%;
 }
 
-/* category */
-.category-title{
-  font-size: 1.5rem;
-}
-
-.category-explain{
-  font-size: 0.8rem;
-}
-
 /* header
 ---------------------------------------*/
 .page-header{
@@ -108,9 +99,24 @@ img{
 .main-catch-copy img{
   /* 拡大・縮小を上手にやりたい*/
   /* height: 500px; */
-  height: 500px;
+  height: 100%;
   width: 90%;
   border-radius: 30px;
+}
+
+/* category-common
+---------------------------------------*/
+.category-title{
+  font-size: 1.5rem;
+}
+
+.category-explain{
+  font-size: 0.8rem;
+}
+
+.category-title-logo{
+  display: flex;
+  justify-content: center;
 }
 
 /* company
@@ -120,9 +126,9 @@ img{
   text-align: center;
 }
 
-.flex{
-  display: flex;
-  justify-content: center;
+/* カテゴリタイトル微調整 */
+.company .category-title-logo{
+  margin-right: 16px;
 }
 
 .company .icon{
