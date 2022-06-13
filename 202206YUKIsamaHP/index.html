@@ -7,8 +7,6 @@
     <!-- CSS -->
     <link rel = "stylesheet" href = "https://unpkg.com/ress/dist/ress.min.css">
     <link href="./css/style.css" rel ="stylesheet">
-    <!-- favicon -->
-    <link rel="icon" type="image/png" href="img/icon/building.png">
   </head>
   <body>
     <!-- header menu-->
@@ -21,32 +19,68 @@
           <li><a href="">お問い合わせ</a></li>
           <li><a href="">アクセス</a></li>
         </ul>
-      </nav>  
+      </nav>
     </header>
     <!-- main img -->
     <div class = "main wrapper">
       <div class="main-catch-copy">
         <!-- iconと文字を中央に並べる-->
         <!-- https://saruwakakun.com/html-css/reference/image-text -->
-        <img src="./img/main-catch-copy.JPG">
+        <img src="./img/img-catch.jpg">
         <p>空間に最高の輝きを</p>
-      </div>  
+      </div>
       <!-- company -->
       <div class="company">
         <!-- ここにiconが入る-->
         <div class="flex">
-          <img class ="icon" src="./img/icon/building.png">
-          <p class="category-title">会社概要</p>  
+          <img class ="icon" src="./img/icon/company.png">
+          <p class="category-title">会社概要</p>
         </div>
         <p class="category-explain">合同会社YUKIは</br>イベントの企画・運営会社です。</p>
-        <img class="category-pic" src="./img/main-catch-copy.JPG">
+        <img class="category-pic" src="./img/img-company.jpg">
       </div>
     </div>
-    <!-- footer -->
-    <footer>
-      <div class="wrapper">
-        <p><small>&copy; 2022 合同会社YUKI</small></p>
+    <!--form cp start-->
+    <p style="text-align: center; margin: 40px auto">
+      お気軽にお問い合わせください。
+    </p>
+    <form
+      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdyPAGHsDA5OetdupB53SjpPsc6LXlzrXRqZy-a8iRB8m4uZg/formResponse"
+      method="POST"
+      class="c-form"
+    >
+      <div class="c-form__item">
+        <input
+          name="entry.1805365319"
+          class="c-form__input"
+          id="field-name"
+          placeholder="お名前"
+          type="text"
+          required="required"
+        />
       </div>
-    </footer>
+      <div class="c-form__item">
+        <input
+          name="entry.1971482172"
+          class="c-form__input"
+          id="field-mail"
+          placeholder="メール"
+          type="email"
+          required="required"
+        />
+      </div>
+      <div class="c-form__item">
+        <textarea
+          name="entry.801585972"
+          class="c-form__input"
+          id="field-message"
+          placeholder="お問い合わせ内容"
+        ></textarea>
+      </div>
+      <div class="c-form__submit">
+        <button type="submit">送信する</button>
+      </div>
+    </form>
+    <!--form cp end-->
   </body>
 </html>
