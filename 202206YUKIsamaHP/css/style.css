@@ -106,6 +106,10 @@ img{
 
 /* category-common
 ---------------------------------------*/
+.category-common{
+  margin-top:100px;
+}
+
 .category-title{
   font-size: 1.5rem;
 }
@@ -119,10 +123,21 @@ img{
   justify-content: center;
 }
 
+.category-explain{
+  margin-top: 16px;
+}
+
+.category-pic{
+  margin-top: 20px;
+  height: 50%;
+  width: 50%;
+  border-radius: 10px;
+}
+
 /* company
 ---------------------------------------*/
 .company{
-  margin-top: 50px;
+  /* margin-top: 50px; */
   text-align: center;
 }
 
@@ -135,15 +150,26 @@ img{
   width:40px; /* iconの幅は固定 */
 }
 
-.category-explain{
-  margin-top: 16px;
+
+/* contact-form
+---------------------------------------*/
+.contact-form{
+  /* margin-top: 50px; */
+  text-align: center;
 }
 
-.category-pic{
-  margin-top: 20px;
-  height: 50%;
-  width: 50%;
-  border-radius: 10px;
+/* カテゴリタイトル微調整 */
+.contact-form .category-title-logo{
+  margin-right: 16px;
+}
+
+.contact-form .icon{
+  width:40px; /* iconの幅は固定 */
+}
+
+
+.contact-form .category-explain{
+  margin-bottom: 20px;
 }
 
 /* form
@@ -209,6 +235,22 @@ textarea.c-form__input {
 }
 
 /* form cp end */
+
+/* access
+---------------------------------------*/
+.access{
+  /* margin-top: 50px; */
+  text-align: center;
+}
+
+/* カテゴリタイトル微調整 */
+.access .category-title-logo{
+  margin-right: 16px;
+}
+
+.access .icon{
+  width:40px; /* iconの幅は固定 */
+}
 
 /* footer
 ---------------------------------------*/
