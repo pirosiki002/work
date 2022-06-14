@@ -21,8 +21,9 @@
         </ul>
       </nav>
     </header>
-    <!-- main img -->
+    <!-- main -->
     <div class = "main wrapper">
+      <!-- main img -->
       <div class="main-catch-copy">
         <!-- iconと文字を中央に並べる-->
         <!-- https://saruwakakun.com/html-css/reference/image-text -->
@@ -30,7 +31,7 @@
         <p>空間に最高の輝きを</p>
       </div>
       <!-- company -->
-      <div class="company">
+      <div class="company category-common">
         <div class="category-title-logo">
           <img class ="icon" src="./img/icon/company.png">
           <p class="category-title">会社概要</p>
@@ -38,54 +39,84 @@
         <p class="category-explain">合同会社YUKIは</br>イベントの企画・運営会社です。</p>
         <img class="category-pic" src="./img/img-company.jpg">
       </div>
+      <!-- contact-form -->
+      <div class="contact-form category-common">
+        <div class="category-title-logo">
+          <img class ="icon" src="./img/icon/company.png">
+          <p class="category-title">お問い合わせ</p>
+        </div>
+        <p class="category-explain">お気軽にお問い合わせください。</p>
+        <!--form cp start-->
+        <form
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdyPAGHsDA5OetdupB53SjpPsc6LXlzrXRqZy-a8iRB8m4uZg/formResponse"
+          method="POST"
+          target="hidden_iframe"
+          onsubmit="submitted=true;"
+          class="c-form"
+        >
+          <div class="c-form__item">
+            <input
+              name="entry.1805365319"
+              class="c-form__input"
+              id="field-name"
+              placeholder="お名前"
+              type="text"
+              required="required"
+            />
+          </div>
+          <div class="c-form__item">
+            <input
+              name="entry.1971482172"
+              class="c-form__input"
+              id="field-mail"
+              placeholder="メール"
+              type="email"
+              required="required"
+            />
+          </div>
+          <div class="c-form__item">
+            <textarea
+              name="entry.801585972"
+              class="c-form__input"
+              id="field-message"
+              placeholder="お問い合わせ内容"
+            ></textarea>
+          </div>
+          <div class="c-form__submit">
+            <button type="submit">送信する</button>
+          </div>
+        </form>
+        <!--form cp end-->
+      </div>
+      <!-- access map-->
+      <div class="access category-common">
+        <div class="category-title-logo">
+          <img class ="icon" src="./img/icon/company.png">
+          <p class="category-title">アクセス</p>
+        </div>
+        <p class="category-explain">
+          〒861-0000 ここに住所が入ります。</br>
+          メール：test@test.com
+        </p>
+        <!-- map -->
+        <img class="category-pic" src="./img/img-company.jpg">
+      </div>
     </div>
-    <!--form cp start-->
-    <p style="text-align: center; margin: 40px auto">
-      お気軽にお問い合わせください。
-    </p>
-    <form
-      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdyPAGHsDA5OetdupB53SjpPsc6LXlzrXRqZy-a8iRB8m4uZg/formResponse"
-      method="POST"
-      class="c-form"
-    >
-      <div class="c-form__item">
-        <input
-          name="entry.1805365319"
-          class="c-form__input"
-          id="field-name"
-          placeholder="お名前"
-          type="text"
-          required="required"
-        />
-      </div>
-      <div class="c-form__item">
-        <input
-          name="entry.1971482172"
-          class="c-form__input"
-          id="field-mail"
-          placeholder="メール"
-          type="email"
-          required="required"
-        />
-      </div>
-      <div class="c-form__item">
-        <textarea
-          name="entry.801585972"
-          class="c-form__input"
-          id="field-message"
-          placeholder="お問い合わせ内容"
-        ></textarea>
-      </div>
-      <div class="c-form__submit">
-        <button type="submit">送信する</button>
-      </div>
-    </form>
-    <!--form cp end-->
     <!-- footer -->
     <footer>
       <div class="wrapper">
         <p><small>&copy; 2022 合同会社YUKI</small></p>
       </div>
     </footer>
+    <!-- javascript-->
+    <script type="text/javascript">
+      let submitted = false;
+    </script>
+    <iframe
+        name="hidden_iframe"
+        id="hidden_iframe"
+        style="display: none"
+        onload="if(submitted){window.location='./thanks.html';}"
+    ></iframe>
   </body>
 </html>
