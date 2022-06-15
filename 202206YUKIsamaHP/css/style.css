@@ -259,6 +259,7 @@ textarea.c-form__input {
 .map-img iframe{
   border-radius: 10px;
 }
+
 /* footer
 ---------------------------------------*/
 footer{
@@ -276,3 +277,30 @@ footer p{
 
 /* sp
 ---------------------------------------*/
+@media(max-width:600px) {
+  /* レスポンシブの場合に分かりやすいように背景色変更（仮）*/
+  body{
+    background-color: black;
+  }
+
+  /* category-common-sp
+  ---------------------------------------*/
+
+
+  /* access-sp
+  ---------------------------------------*/
+  .map-img {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 75%;
+    position: relative;
+  }
+  .map-img iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+}
