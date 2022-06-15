@@ -252,6 +252,13 @@ textarea.c-form__input {
   width:40px; /* iconの幅は固定 */
 }
 
+.map-img{
+  margin-top:20px;
+}
+
+.map-img iframe{
+  border-radius: 10px;
+}
 /* footer
 ---------------------------------------*/
 footer{
@@ -265,3 +272,7 @@ footer p{
   color: #fff;
   font-size: 0.875rem;
 }
+
+
+/* sp
+---------------------------------------*/
