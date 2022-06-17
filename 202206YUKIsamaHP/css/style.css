@@ -11,11 +11,13 @@ html {
 body{
   font-family: 'Noto Sans JP', sans-serif;
   line-height: 1.7;
-  color:black;
+  color:white;
+  background-color: black;
 }
 
 a{
   text-decoration: none;
+  color:white;
 }
 
 img{
@@ -25,7 +27,7 @@ img{
 /* header
 ---------------------------------------*/
 .page-header{
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid white;
 }
 
 .page-header h1{
@@ -52,7 +54,7 @@ img{
 }
 
 .main-nav a{
-  color:#432
+  color:white;
 }
 
 .main-nav a:hover{
@@ -187,9 +189,10 @@ img{
 }
 .c-form__input {
 	padding: 10px;
+  color:white;
 }
 .c-form__input {
-	width: 90%;
+	width: 100%;
 	font-size: 16px;
 	border: solid 1px #333;
 	border-radius: 4px;
@@ -267,6 +270,7 @@ footer{
   text-align: center;
   padding: 26px 0;
   margin-top: 50px;
+  border-top: 1px solid #fff;
 }
 
 footer p{
@@ -280,7 +284,7 @@ footer p{
 @media(max-width:600px) {
   /* レスポンシブの場合に分かりやすいように背景色変更（仮）*/
   body{
-    background-color: black;
+    background-color:aquamarine;
   }
 
   /* main-sp
