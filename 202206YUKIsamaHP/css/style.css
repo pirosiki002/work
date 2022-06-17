@@ -283,9 +283,17 @@ footer p{
     background-color: black;
   }
 
+  /* main-sp
+  ---------------------------------------*/
+  .main-catch-copy img{
+    width: 100vw;
+  }
+
   /* category-common-sp
   ---------------------------------------*/
-
+  .category-pic{
+    width: 100vw;
+  }
 
   /* access-sp
   ---------------------------------------*/
