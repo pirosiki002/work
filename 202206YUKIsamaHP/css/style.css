@@ -114,6 +114,7 @@ img{
 
 .category-title{
   font-size: 1.5rem;
+  margin-left:5px;
 }
 
 .category-explain{
@@ -123,6 +124,10 @@ img{
 .category-title-logo{
   display: flex;
   justify-content: center;
+}
+
+.category-title-logo .icon{
+  /* ロゴ画像の調整 */
 }
 
 .category-explain{
@@ -233,7 +238,8 @@ textarea.c-form__input {
 		flex-wrap: nowrap;
 	}
 	.c-form__input {
-		width: 55%;
+		/* width: 55%; */
+		width: 84%;
 	}
 }
 
