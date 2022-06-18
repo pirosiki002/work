@@ -30,15 +30,17 @@ img{
   border-bottom: 1px solid white;
 }
 
+.page-header .logo{
+  margin:10px 0;
+  width:90px;
+}
+
 .page-header h1{
+  margin-top: 18px;
   font-size: 3rem;
   font-weight: 900;
 }
 
-.logo{
-  width: 210px;
-  margin-top: 14px;
-}
 
 .main-nav{
   display: flex;
