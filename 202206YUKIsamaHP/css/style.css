@@ -74,6 +74,24 @@ img{
   padding: 0 4%;
 }
 
+/* menu humbergar start */
+/* #global-navi {
+  background:#333;
+  position: fixed;
+  top: 0;
+  right: 0px;
+  width: 100%;
+}
+#wrapper nav ul li{
+  display:inline-block;
+  font-size: 16px;
+  padding:  30px 20px 25px 28px;
+}
+#wrapper nav ul li a{
+  color: #ddd
+} */
+/* menu humbergar end */
+
 /* main-catch-copy
 ---------------------------------------*/
 .main{
@@ -128,9 +146,9 @@ img{
   justify-content: center;
 }
 
-.category-title-logo .icon{
+/* .category-title-logo .icon{
   /* ロゴ画像の調整 */
-}
+/* } */
 
 .category-explain{
   margin-top: 16px;
@@ -156,6 +174,49 @@ img{
 }
 
 .company .icon{
+  width:40px; /* iconの幅は固定 */
+}
+
+/* flexおためし
+---------------------------------------*/
+/* https://niwaka-web.com/flexbox_reverse/ */
+
+.flex-try{
+  text-align: center;
+}
+
+.pict {
+  width: 50%;
+  margin-left: 3%;
+}
+
+.flex-pic{
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.box {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+/* recruit
+---------------------------------------*/
+.recruit{
+  /* margin-top: 50px; */
+  text-align: center;
+}
+
+/* カテゴリタイトル微調整 */
+.recruit .category-title-logo{
+  margin-right: 16px;
+}
+
+.recruit .icon{
   width:40px; /* iconの幅は固定 */
 }
 
@@ -306,6 +367,17 @@ footer p{
   .category-pic{
     width: 100vw;
   }
+
+  /* flex-try-sp
+  ---------------------------------------*/
+  .box {
+    /* display:flex; */
+    flex-direction: column;
+    /* justify-content: space-between; */
+  }
+  
+  
+  
 
   /* access-sp
   ---------------------------------------*/

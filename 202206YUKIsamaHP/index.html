@@ -7,20 +7,31 @@
     <!-- CSS -->
     <link rel = "stylesheet" href = "https://unpkg.com/ress/dist/ress.min.css">
     <link href="./css/style.css" rel ="stylesheet">
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
   </head>
   <body>
     <!-- header menu-->
     <header class = "page-header wrapper">
       <img class ="logo" src="./img/icon/icon-hot.png" alt="合同会社YUKI">
       <h1>合同会社YUKI</h1>
-      <nav>
-        <ul class ="main-nav">
-          <li><a href="">会社概要</a></li>
-          <li><a href="">求人募集</a></li>
-          <li><a href="">お問い合わせ</a></li>
-          <li><a href="">アクセス</a></li>
-        </ul>
-      </nav>
+      <!-- <div id="wrapper">
+        <span></span>
+        <span></span>
+        <span></span> -->
+        <nav id="global-navi">
+          <ul class ="main-nav">
+            <li><a href="">会社概要</a></li>
+            <li><a href="">求人募集</a></li>
+            <li><a href="">お問い合わせ</a></li>
+            <li><a href="">アクセス</a></li>
+          </ul>
+        </nav>
+      <!-- </div> -->
     </header>
     <!-- main -->
     <div class = "main wrapper">
@@ -38,6 +49,35 @@
           <p class="category-title">会社概要</p>
         </div>
         <p class="category-explain">合同会社YUKIは</br>イベントの企画・運営会社です。</p>
+        <img class="category-pic" src="./img/img-company.jpg">
+      </div>
+      <div class="company category-common">      
+      <!-- flexのおためし start -->
+      <!-- https://niwaka-web.com/flexbox_reverse/ -->
+      <div class="flex-try category-common">
+        <div class="category-title-logo">
+          <img class ="icon" src="./img/icon/icon-bill.png">
+          <p class="category-title">Flexのおためしです</p>
+        </div>
+        <p class="category-explain">＊＊＊＊＊＊＊＊＊は</br>＊＊＊＊＊＊＊＊＊＊＊です。</p>
+      <div class="company category-common">      
+      <div class="box">
+        <div class="pict">
+          <img class="flex-pic" src="./img/img-company.jpg">
+        </div>
+        <div class="text">
+          <h3>見出しが入ります</h3>
+          <p>親譲りの無鉄砲で小供の時から損ばかりしている。</p>
+        </div>
+      </div>
+      <!-- flexのおためし end -->
+      <!-- recuruit -->
+      <div class="recruit category-common">
+        <div class="category-title-logo">
+          <img class ="icon" src="./img/icon/icon-bill.png">
+          <p class="category-title">求人募集</p>
+        </div>
+        <p class="category-explain">アルバイト募集中です。</br>お問い合わせフォームまたはメールでご連絡ください。</p>
         <img class="category-pic" src="./img/img-company.jpg">
       </div>
       <!-- contact-form -->
@@ -122,5 +162,7 @@
         style="display: none"
         onload="if(submitted){window.location='./thanks.html';}"
     ></iframe>
+    <!-- jQuery -->
+    <script type="text/javascript" src="./js/jQuery.js"></script>
   </body>
 </html>
