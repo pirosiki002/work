@@ -32,7 +32,7 @@ img{
 
 .page-header .logo{
   margin:10px 0;
-  width:90px;
+  width:100px;
 }
 
 .page-header h1{
@@ -73,24 +73,6 @@ img{
   margin: 0 auto;
   padding: 0 4%;
 }
-
-/* menu humbergar start */
-/* #global-navi {
-  background:#333;
-  position: fixed;
-  top: 0;
-  right: 0px;
-  width: 100%;
-}
-#wrapper nav ul li{
-  display:inline-block;
-  font-size: 16px;
-  padding:  30px 20px 25px 28px;
-}
-#wrapper nav ul li a{
-  color: #ddd
-} */
-/* menu humbergar end */
 
 /* main-catch-copy
 ---------------------------------------*/
@@ -344,6 +326,18 @@ footer p{
   /* レスポンシブの場合に分かりやすいように背景色変更（仮）*/
   body{
     background-color:aquamarine;
+  }
+
+  /* header-sp
+  ---------------------------------------*/
+  .page-header .logo{
+    height: auto;
+    width: 68px;
+
+  }
+  
+  #global-navi{
+    display: none;
   }
 
   /* main-sp
