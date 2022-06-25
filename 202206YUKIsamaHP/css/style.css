@@ -146,10 +146,6 @@ img{
   justify-content: center;
 }
 
-/* .category-title-logo .icon{
-  /* ロゴ画像の調整 */
-/* } */
-
 .category-explain{
   margin-top: 16px;
 }
@@ -161,48 +157,42 @@ img{
   border-radius: 10px;
 }
 
+
 /* company
 ---------------------------------------*/
-.company{
-  /* margin-top: 50px; */
+.company-flex .category-common{
+  margin-top: 20px;
   text-align: center;
 }
 
-/* カテゴリタイトル微調整 */
-.company .category-title-logo{
-  margin-right: 16px;
-}
 
-.company .icon{
+.company-flex .icon{
   width:40px; /* iconの幅は固定 */
 }
 
-/* flexおためし
----------------------------------------*/
-/* https://niwaka-web.com/flexbox_reverse/ */
-
-.flex-try{
-  text-align: center;
-}
 
 .pict {
   width: 50%;
   margin-left: 3%;
 }
 
-.flex-pic{
+.pic-company-flex{
   height: auto;
   width: 100%;
   border-radius: 10px;
 }
 
 
-.box {
+.company-box {
   display:flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
+.company-flex .text p{
+  text-align: left;
+}
 
 /* recruit
 ---------------------------------------*/
