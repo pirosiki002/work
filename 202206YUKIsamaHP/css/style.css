@@ -176,7 +176,7 @@ img{
   margin-left: 3%;
 }
 
-.pic-company-flex{
+.company-pic{
   height: auto;
   width: 100%;
   border-radius: 10px;
@@ -358,16 +358,20 @@ footer p{
     width: 100vw;
   }
 
-  /* flex-try-sp
-  ---------------------------------------*/
-  .box {
-    /* display:flex; */
+  /* company-flex-sp
+  ---------------------------------------*/  
+  .company-box{
     flex-direction: column;
-    /* justify-content: space-between; */
   }
-  
-  
-  
+
+  .company-flex .pict{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .company-flex .text{
+    font-size:0.8rem;
+  }
 
   /* access-sp
   ---------------------------------------*/
