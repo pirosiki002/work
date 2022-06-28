@@ -67,30 +67,6 @@ img{
   color: gray;
 }
 
-
-/* sp-menu ok start */
-/* .menu-content{
-  display: flex;
-  font-size: 1.00rem;
-  text-transform: uppercase;
-  margin-top: 55px;
-  margin-bottom: 10px;
-  list-style: none;
-}
-
-.menu-content li {
-  margin-left: 36px;
-}
-
-.menu-content a{
-  color:white;
-}
-
-.menu-content a:hover{
-  color: gray;
-} */
-/* sp-menu ok end */
-
 .page-header{
   display: flex;
   justify-content: space-between;
@@ -138,7 +114,7 @@ img{
   /* height: 500px; */
   height: 100%;
   width: 90%;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 /* category-common
@@ -386,7 +362,8 @@ footer p{
     justify-content: center;
     align-items: center;
     z-index: 90;
-    background-color: #3584bb;
+    background-color: #000;
+    border:1px solid#fff;
   }
   .menu-btn span,
   .menu-btn span:before,
@@ -428,11 +405,12 @@ footer p{
     top: 0;
     left: 100%;/*leftの値を変更してメニューを画面外へ*/
     z-index: 80;
-    background-color: #3584bb;
+    background-color: #000;
     transition: all 0.5s;/*アニメーション設定*/
   }
 
   .menu-content li {
+    width:200px;
     float: none;  /* メニューを縦並びに */
   }
 
@@ -465,12 +443,15 @@ footer p{
       border-right: solid 2px #ffffff;
       transform: rotate(45deg);
       position: absolute;
-      right: 11px;
-      top: 16px;
+      right: 10px;
+      top: 19px;
   }
 
   /* main-sp
   ---------------------------------------*/
+  .main-catch-copy {
+    margin-top: 80px;
+  }
   .main-catch-copy img{
     width: 100vw;
   }
@@ -495,6 +476,12 @@ footer p{
   .company-flex .text{
     font-size:0.8rem;
   }
+
+  .company-box .text{
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
 
   /* access-sp
   ---------------------------------------*/
