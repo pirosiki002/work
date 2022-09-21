@@ -7,7 +7,7 @@ let sentence = 0;
 function doSearch(){
   console.log("doSearch!!");
 
-  //Googleドキュメントの情報を読み取る
+  // Googleドキュメントの情報を読み取る
   // const DOC_URL = '1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg'; 
   const DOC_URL = 'https://docs.google.com/document/d/1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg/edit'; 
   const doc = DocumentApp.openByUrl(DOC_URL);
@@ -16,36 +16,32 @@ function doSearch(){
   sentence = doc.getBody().getText();
   console.log("sentence =", sentence);
 
-  //指定したワードで検索をかける（ループする必要がありそう。
-  let index = sentence.indexOf("テスト", 0);
-  // let index = sentence.match("テスト");
-  // let index = sentence.match(/テスト/);
-  console.log("index true or false =", index);
 
-  while(0 <= index){
-    sentence = sentence.replace("テスト", "TEST");
-    console.log("sentence replace =", sentence);
-    index = sentence.indexOf("テスト", 0);
-  }
+  //文字列が一致するかを確認
+  let keyword = 'テスト';
+  let wordPlaceNum = sentence.indexOf(keyword);
+  console.log('wordPlaceNum =', wordPlaceNum);
 
-  //変更した文字の色を変える
-  // sentence.editAsText().setForegroundColor('#ff0000');
+  //一致したら先頭に●をくっつける（insertとかを使うことになるかと）
+  // sentence = sentence.replace("テスト", "●テスト");
+
+  //●の分、一文字分増えるため、wordPlaceNum + 2を検索すれば良さそう。
+
+  //次の検索に進む(これができるかが問題・・)
+  wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 1);
+  console.log('wordPlaceNum2 =', wordPlaceNum);
+
+  //indexOfの結果＝wordPlaceNumが-1でない限り続ければOKか。
 
   //置換したテキストを挿入する
-  const body = doc.getBody();
-  body.clear() // 全消去
-  var paragraphs = body.getParagraphs();
-  var p1 = paragraphs[0];
+  // const body = doc.getBody();
+  // body.clear() // 全消去
+  // var paragraphs = body.getParagraphs();
+  // var p1 = paragraphs[0];
 
   //段落にテキストを挿入する。
-  // p1.insertText( 0, "text" );
-  // p1.insertText( 0, "-----");
-  p1.insertText( 0, sentence);
-  //段落にテキストを追加する。
-  // p1.appendText("text");
+  // p1.insertText( 0, sentence);
 
-  //変更した文字の色を変える
-  // p1.editAsText().setForegroundColor('#ff0000');
 
 }
 
