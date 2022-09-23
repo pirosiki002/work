@@ -8,7 +8,6 @@ function doSearch(){
   console.log("doSearch!!");
 
   // Googleドキュメントの情報を読み取る
-  // const DOC_URL = '1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg'; 
   const DOC_URL = 'https://docs.google.com/document/d/1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg/edit'; 
   const doc = DocumentApp.openByUrl(DOC_URL);
   console.log("title =", doc.getName());
@@ -19,28 +18,41 @@ function doSearch(){
 
   const add_circle  = '●';
   //文字列が一致するかを確認
-  let keyword = 'TEST';
-  let wordPlaceNum = sentence.indexOf(keyword);
+  let keyword = 'TEST';                         // 検索したいキーワード
+  let wordPlaceNum = sentence.indexOf(keyword); // キーワードの場所を文章の中から探す
   console.log('wordPlaceNum =', wordPlaceNum);
 
-  //indexOfの結果＝wordPlaceNumが-1でない限り続ければOK
+  // 関数化できそう。do_add_mark()
+  // indexOfの結果で、キーワードが見つかる（wordPlaceNumが-1でない)限り続ける
   while(wordPlaceNum >= 0){
-    //一致したら先頭に●をくっつける（insertとかを使うことになるかと）
-    //一度分解して結合する
-    let first_words   = sentence.slice(0, wordPlaceNum);
-    let last_words    = sentence.slice(wordPlaceNum);
-    console.log(first_words + add_circle + last_words)
+    // 文章全体を一度分解して結合する
+    let first_words   = sentence.slice(0, wordPlaceNum);  // 前半部分
+    let last_words    = sentence.slice(wordPlaceNum);     // 後半部分
 
-    //first_wordの最後の文字が●なら、すでに対応済のキーワードということ。
-    //すでに●がついていたときは結合しない処理が必要
-    sentence = first_words + add_circle + last_words;
+    // 前半部分の最後の文字を確認し、すでに●がついていたら対応しない
+    console.log("first_words.charAt(str.length - 1) ==", first_words.charAt(first_words.length - 1));
 
-    //すでに●がついている場合、文字の追加がないため、wordPlaceNum + 1してから次の検索に映ることになる
+    // すでに●がついている場合、文字の追加がないため、wordPlaceNum + 1してから次の検索に映ることになる
+    let overlappingCheck = first_words.charAt(first_words.length - 1);
+    if(add_circle === overlappingCheck){
 
-    //●の分、一文字分増えるため、wordPlaceNum + 2を検索すれば良さそう。
-    //(+0だと●から検索。+1だとキーワードから検索。+2にすればキーワードから1文字ずれたところから検索となる)
-    //次の検索に進む
-    wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 2);
+      // すでに●がついていたときはなにも処理せず結合
+      sentence = first_words + last_words;
+      // 次の検索に進む（1文字だけずらす)
+      wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 1);
+
+    }
+    else{
+      // ●を結合
+      sentence = first_words + add_circle + last_words;
+      // ●を追加した分、wordPlaceNum+0だと●から検索。+1だとキーワードから検索（同じ処理の無限ループ）
+      // +2にすればキーワードから1文字ずれたところから検索となる（正しい処理）
+      // 次の検索に進む
+      wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 2);
+
+    }
+
+
     console.log('wordPlaceNum2 =', wordPlaceNum);
   }
 
