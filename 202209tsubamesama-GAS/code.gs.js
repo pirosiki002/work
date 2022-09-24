@@ -1,10 +1,71 @@
-function myFunction() {
-  console.log("myFunction!!");  
+//*********************************
+// グローバル変数の宣言
+//*********************************
+// GoogleスプレッドシートのIDを変数に格納
+var spreadsheetId = '13ZNaVVSFikTNFNm0y2sFE2djS0L3cm8PGJBxh3aWlvk';
+// スプレッドシートの最大列を設定
+const MAX_COL = 2;
+
+let g_org_gas_data_arr;     // オリジナルの（削除前の）グローバル配列(おそらく不要)
+let g_gas_data_arr;         // キーワード一覧格納用のグローバル配列
+
+//*********************************
+// スプレッドシートのデータを読み込む
+//*********************************
+function GetSpreadsheet(){
+
+  console.log("GetSpreadsheet2() called");
+
+  //操作するスプレッドシートIDとシート名を指定して開く
+  var sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName('キーワード一覧');
+  
+  //全データを取得するので、最終列と最終行を取得する
+  var last_col = sheet.getLastColumn();  //最終列取得
+  var last_row = sheet.getLastRow();     //最終行取得
+  
+  // データを取得する範囲を指定して取得し、2次元配列で返す
+  return sheet.getRange(1, 1, last_row, last_col).getValues();
 }
 
-let sentence = 0;
 
+//*********************************
+// GASのデータを取得しグローバル変数に設定
+//*********************************
+function getGASdata(spreadsheet_data){
+  console.log("js getGASdata() called");
+  console.log("spreadsheet_data.length = ", spreadsheet_data.length);
+
+  //代入用の配列をNew
+  g_gas_data_arr = new Array(spreadsheet_data.length);
+  for (let i = 0; i < g_gas_data_arr.length; i++){
+    g_gas_data_arr[i] = new Array(MAX_COL);
+  }
+
+  for(let row = 0; row < spreadsheet_data.length; row++){
+    //最初のタイトル行を削除する分、サイズを1行分-1しておく
+    for(let col = 0; col < spreadsheet_data[row].length; col++){
+      //グローバル配列に設定
+      g_gas_data_arr[row][col] = spreadsheet_data[row][col];    //1行目（row=0)はタイトル文字が入っている。2行目（row=1)から設定する
+      console.log("g_gas_data_arr" + "[" + row + "]" + "[" + col + "]=" + g_gas_data_arr[row][col]);
+    }
+  }
+
+  //配列をコピーしておく(debug)
+  g_org_gas_data_arr = [...g_gas_data_arr];
+
+}
+
+//*********************************
+// キーワード検索開始(main)
+//*********************************
 function doSearch(){
+
+  // スプレッドシートのデータ読み込み
+  let gas_data = GetSpreadsheet();
+  // Googleスプレッドシートの情報を設定
+  getGASdata(gas_data);
+
+  let sentence = 0; //文章の初期化
   console.log("doSearch!!");
 
   // Googleドキュメントの情報を読み取る
@@ -12,17 +73,31 @@ function doSearch(){
   const doc = DocumentApp.openByUrl(DOC_URL);
   console.log("title =", doc.getName());
 
+  // Googleドキュメントの文章を取得
   sentence = doc.getBody().getText();
-  console.log("sentence =", sentence);
+  console.log("before sentence =", sentence);
 
+  // 文字列が一致するかを確認
+  let keyword = 'TEST'; // 検索したいキーワード
+
+  // マークをつける
+  sentence = do_add_mark(keyword, sentence);
+
+  console.log("after sentence =", sentence);
+
+  // Googleドキュメントを上書き
+  doRewriteDoc(doc, sentence);
+
+}
+
+//*********************************
+// キーワードを元にマークをつける
+//*********************************
+function do_add_mark(keyword, sentence){
 
   const add_circle  = '●';
-  //文字列が一致するかを確認
-  let keyword = 'TEST';                         // 検索したいキーワード
   let wordPlaceNum = sentence.indexOf(keyword); // キーワードの場所を文章の中から探す
-  console.log('wordPlaceNum =', wordPlaceNum);
 
-  // 関数化できそう。do_add_mark()
   // indexOfの結果で、キーワードが見つかる（wordPlaceNumが-1でない)限り続ける
   while(wordPlaceNum >= 0){
     // 文章全体を一度分解して結合する
@@ -51,23 +126,24 @@ function doSearch(){
       wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 2);
 
     }
-
-
     console.log('wordPlaceNum2 =', wordPlaceNum);
   }
 
-  //置換したテキストを挿入する
+  return sentence;
+}
+
+//*********************************
+// Googleドキュメントを上書き
+//*********************************
+function doRewriteDoc(doc, sentence){
+
+  // 置換したテキストを挿入する
   const body = doc.getBody();
   body.clear() // 全消去
   var paragraphs = body.getParagraphs();
   var p1 = paragraphs[0];
 
-  //段落にテキストを挿入する。
+  // 段落にテキストを挿入する。
   p1.insertText( 0, sentence);
-
-
-}
-
-function searchWord(){
-
+  
 }
