@@ -6,8 +6,10 @@ var spreadsheetId = '13ZNaVVSFikTNFNm0y2sFE2djS0L3cm8PGJBxh3aWlvk';
 // スプレッドシートの最大列を設定
 const MAX_COL = 2;
 
-let g_org_gas_data_arr;     // オリジナルの（削除前の）グローバル配列(おそらく不要)
+// let g_org_gas_data_arr;     // オリジナルの（削除前の）グローバル配列(おそらく不要)
 let g_gas_data_arr;         // キーワード一覧格納用のグローバル配列
+
+let g_doc_url;              // GoogleドキュメントのURL
 
 //*********************************
 // スプレッドシートのデータを読み込む
@@ -50,8 +52,15 @@ function getGASdata(spreadsheet_data){
     }
   }
 
+  // 各種設定
+  g_doc_url = g_gas_data_arr[1][2]; // GoogleドキュメントのURLを取得
+
   //配列をコピーしておく(debug)
-  g_org_gas_data_arr = [...g_gas_data_arr];
+  // g_org_gas_data_arr = [...g_gas_data_arr];
+
+  // 検索するキーワードだけが入った配列を作っておき、のちほどキーワード検索関数でループする
+  // g_gas_data_arr[1][0]=テスト
+  // g_gas_data_arr[2][0]=テスト
 
 }
 
@@ -69,7 +78,7 @@ function doSearch(){
   console.log("doSearch!!");
 
   // Googleドキュメントの情報を読み取る
-  const DOC_URL = 'https://docs.google.com/document/d/1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg/edit'; 
+  const DOC_URL = g_doc_url; 
   const doc = DocumentApp.openByUrl(DOC_URL);
   console.log("title =", doc.getName());
 
@@ -84,6 +93,9 @@ function doSearch(){
   sentence = do_add_mark(keyword, sentence);
 
   console.log("after sentence =", sentence);
+
+  // Googleドキュメントを別で新規作成する（引数はファイル名）
+  // var doc2 = DocumentApp.create('Sample2 Document');
 
   // Googleドキュメントを上書き
   doRewriteDoc(doc, sentence);
@@ -139,7 +151,7 @@ function doRewriteDoc(doc, sentence){
 
   // 置換したテキストを挿入する
   const body = doc.getBody();
-  body.clear() // 全消去
+  body.clear(); // 全消去
   var paragraphs = body.getParagraphs();
   var p1 = paragraphs[0];
 
