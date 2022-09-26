@@ -6,10 +6,9 @@ var spreadsheetId = '13ZNaVVSFikTNFNm0y2sFE2djS0L3cm8PGJBxh3aWlvk';
 // スプレッドシートの最大列を設定
 const MAX_COL = 2;
 
-// let g_org_gas_data_arr;     // オリジナルの（削除前の）グローバル配列(おそらく不要)
-let g_gas_data_arr;         // キーワード一覧格納用のグローバル配列
-
+let g_gas_data_arr;         // スプレッドシート情報格納用のグローバル配列
 let g_doc_url;              // GoogleドキュメントのURL
+let g_keyword_arr;          // キーワード一覧格納用のグローバル配列
 
 //*********************************
 // スプレッドシートのデータを読み込む
@@ -20,11 +19,11 @@ function GetSpreadsheet(){
 
   //操作するスプレッドシートIDとシート名を指定して開く
   var sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName('キーワード一覧');
-  
+
   //全データを取得するので、最終列と最終行を取得する
   var last_col = sheet.getLastColumn();  //最終列取得
   var last_row = sheet.getLastRow();     //最終行取得
-  
+
   // データを取得する範囲を指定して取得し、2次元配列で返す
   return sheet.getRange(1, 1, last_row, last_col).getValues();
 }
@@ -47,7 +46,7 @@ function getGASdata(spreadsheet_data){
     //最初のタイトル行を削除する分、サイズを1行分-1しておく
     for(let col = 0; col < spreadsheet_data[row].length; col++){
       //グローバル配列に設定
-      g_gas_data_arr[row][col] = spreadsheet_data[row][col];    //1行目（row=0)はタイトル文字が入っている。2行目（row=1)から設定する
+      g_gas_data_arr[row][col] = spreadsheet_data[row][col];
       console.log("g_gas_data_arr" + "[" + row + "]" + "[" + col + "]=" + g_gas_data_arr[row][col]);
     }
   }
@@ -59,9 +58,21 @@ function getGASdata(spreadsheet_data){
   // g_org_gas_data_arr = [...g_gas_data_arr];
 
   // 検索するキーワードだけが入った配列を作っておき、のちほどキーワード検索関数でループする
-  // g_gas_data_arr[1][0]=テスト
-  // g_gas_data_arr[2][0]=テスト
 
+  console.log("keyword1 =",g_gas_data_arr[1][0]);
+  console.log("keyword2 =",g_gas_data_arr[2][0]);
+
+  console.log("g_gas_data_arr.length=", g_gas_data_arr.length);
+
+  g_keyword_arr = new Array((g_gas_data_arr.length));
+
+  for(let i = 0; i < g_gas_data_arr.length; i++){
+    g_keyword_arr[i] = g_gas_data_arr[i][0];
+  }
+
+  for(let j = 1; j < g_gas_data_arr.length; j++){
+    console.log("g_keyword_arr" + "["+ j + "]", g_keyword_arr[j]);
+  }
 }
 
 //*********************************
@@ -89,15 +100,25 @@ function doSearch(){
   // 文字列が一致するかを確認
   let keyword = 'TEST'; // 検索したいキーワード
 
+  // キーワードの数だけループする。i=0にはタイトルが入っているため、i=1から開始
+  for(let i = 1; i < g_gas_data_arr.length; i++){
+    keyword = g_keyword_arr[i];
+    console.log("keyword"+ keyword + "start*************");
+    sentence = do_add_mark(keyword, sentence);
+    console.log("keyword"+ keyword + "end*************");
+  }
+
   // マークをつける
-  sentence = do_add_mark(keyword, sentence);
+  // sentence = do_add_mark(keyword, sentence);
 
   console.log("after sentence =", sentence);
 
+  // 本対応は新規ドキュメント作成。ただ、Debugが面倒なためにコメントアウト中。
   // Googleドキュメントを別で新規作成する（引数はファイル名）
-  // var doc2 = DocumentApp.create('Sample2 Document');
+  // let newDoc = DocumentApp.create('NewDocument');
 
   // Googleドキュメントを上書き
+  // doRewriteDoc(newDoc, sentence);
   doRewriteDoc(doc, sentence);
 
 }
@@ -134,6 +155,7 @@ function do_add_mark(keyword, sentence){
       sentence = first_words + add_circle + last_words;
       // ●を追加した分、wordPlaceNum+0だと●から検索。+1だとキーワードから検索（同じ処理の無限ループ）
       // +2にすればキーワードから1文字ずれたところから検索となる（正しい処理）
+
       // 次の検索に進む
       wordPlaceNum = sentence.indexOf(keyword, wordPlaceNum + 2);
 
@@ -157,5 +179,5 @@ function doRewriteDoc(doc, sentence){
 
   // 段落にテキストを挿入する。
   p1.insertText( 0, sentence);
-  
+
 }
