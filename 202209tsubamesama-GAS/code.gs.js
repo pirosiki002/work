@@ -6,8 +6,10 @@ var spreadsheetId = '13ZNaVVSFikTNFNm0y2sFE2djS0L3cm8PGJBxh3aWlvk';
 // スプレッドシートの最大列を設定
 const MAX_COL = 2;
 
-let g_org_gas_data_arr;     //オリジナルの（削除前の）グローバル配列
-let g_gas_data_arr;         //キーワード一覧格納用のグローバル配列
+// let g_org_gas_data_arr;     // オリジナルの（削除前の）グローバル配列(おそらく不要)
+let g_gas_data_arr;         // キーワード一覧格納用のグローバル配列
+
+let g_doc_url;              // GoogleドキュメントのURL
 
 //*********************************
 // スプレッドシートのデータを読み込む
@@ -50,40 +52,64 @@ function getGASdata(spreadsheet_data){
     }
   }
 
+  // 各種設定
+  g_doc_url = g_gas_data_arr[1][2]; // GoogleドキュメントのURLを取得
+
   //配列をコピーしておく(debug)
-  g_org_gas_data_arr = [...g_gas_data_arr];
+  // g_org_gas_data_arr = [...g_gas_data_arr];
+
+  // 検索するキーワードだけが入った配列を作っておき、のちほどキーワード検索関数でループする
+  // g_gas_data_arr[1][0]=テスト
+  // g_gas_data_arr[2][0]=テスト
 
 }
 
 //*********************************
-// キーワード検索開始
+// キーワード検索開始(main)
 //*********************************
 function doSearch(){
 
-  //スプレッドシートのデータ読み込み
+  // スプレッドシートのデータ読み込み
   let gas_data = GetSpreadsheet();
   // Googleスプレッドシートの情報を設定
   getGASdata(gas_data);
 
-  let sentence = 0;
+  let sentence = 0; //文章の初期化
   console.log("doSearch!!");
 
   // Googleドキュメントの情報を読み取る
-  const DOC_URL = 'https://docs.google.com/document/d/1E9ADJL7qDyzZjgQHyAhwjf73Kwj-3h6KuBCDw3W8ERg/edit'; 
+  const DOC_URL = g_doc_url; 
   const doc = DocumentApp.openByUrl(DOC_URL);
   console.log("title =", doc.getName());
 
+  // Googleドキュメントの文章を取得
   sentence = doc.getBody().getText();
-  console.log("sentence =", sentence);
+  console.log("before sentence =", sentence);
 
+  // 文字列が一致するかを確認
+  let keyword = 'TEST'; // 検索したいキーワード
+
+  // マークをつける
+  sentence = do_add_mark(keyword, sentence);
+
+  console.log("after sentence =", sentence);
+
+  // Googleドキュメントを別で新規作成する（引数はファイル名）
+  // var doc2 = DocumentApp.create('Sample2 Document');
+
+  // Googleドキュメントを上書き
+  doRewriteDoc(doc, sentence);
+
+}
+
+//*********************************
+// キーワードを元にマークをつける
+//*********************************
+function do_add_mark(keyword, sentence){
 
   const add_circle  = '●';
-  //文字列が一致するかを確認
-  let keyword = 'TEST';                         // 検索したいキーワード
   let wordPlaceNum = sentence.indexOf(keyword); // キーワードの場所を文章の中から探す
-  console.log('wordPlaceNum =', wordPlaceNum);
 
-  // 関数化できそう。do_add_mark()
   // indexOfの結果で、キーワードが見つかる（wordPlaceNumが-1でない)限り続ける
   while(wordPlaceNum >= 0){
     // 文章全体を一度分解して結合する
@@ -115,13 +141,21 @@ function doSearch(){
     console.log('wordPlaceNum2 =', wordPlaceNum);
   }
 
-  //置換したテキストを挿入する
+  return sentence;
+}
+
+//*********************************
+// Googleドキュメントを上書き
+//*********************************
+function doRewriteDoc(doc, sentence){
+
+  // 置換したテキストを挿入する
   const body = doc.getBody();
-  body.clear() // 全消去
+  body.clear(); // 全消去
   var paragraphs = body.getParagraphs();
   var p1 = paragraphs[0];
 
-  //段落にテキストを挿入する。
+  // 段落にテキストを挿入する。
   p1.insertText( 0, sentence);
-
+  
 }
