@@ -44,17 +44,26 @@ function newInsertRow() {
 }
 
 
-// ARRAYFORMULAを最後の行まで適用
+// ARRAYFORMULAを最後の行まで適用する関数
 function applyArrayFormula() {
   Logger.log('applyArrayFormula called!!!');
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var lastRow = sheet.getLastRow();
 
-  // ARRAYFORMULAを最後の行まで適用
-  sheet.getRange('AA15').setFormula('=ARRAYFORMULA(IFERROR(T15:T' + lastRow + ',0))');
+  // 処理対象の列と対応する計算式
+  var formulas = {
+    'AA': '=ARRAYFORMULA(IFERROR(T15:T' + lastRow + ',0))',
+    'AB': '=ARRAYFORMULA(IFERROR(W15:W' + lastRow + '-T15:T' + lastRow + ',0))',
+    // 他の列と計算式を追加することが可能です
+  };
 
-  // 空白を設定する
-  setRangeToBlank(sheet, "AA46:AA" + lastRow);
+  for (var column in formulas) {
+    // ARRAYFORMULAを最後の行まで適用
+    sheet.getRange(column + '15').setFormula(formulas[column]);
+
+    // 空白を設定する
+    setRangeToBlank(sheet, column + '46:' + column + lastRow);
+  }
 }
 
 // 空白を設定する
@@ -68,3 +77,4 @@ function setRangeToBlank(sheet, rangeA1Notation) {
   rangeToPaste.setValues(blankValues);
 }
 
+// 新メニュー(Shoさま対応) end
