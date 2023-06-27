@@ -1,24 +1,17 @@
-const rf = reportfunctions.GetInstance();
 
-/* 起動時処理 */
-function onOpen() {
+// スプレッドシートが開かれたときに行いたい処理
+function onOpen(e) {
   var ui = SpreadsheetApp.getUi();
-
-  // 新規メニューの追加
-  ui.createMenu('新メニュー')
-    .addItem('入力行の追加', 'newInsertRow')
-    .addToUi();
-
+  ui.createMenu('メニュー')
+      .addItem('入力行の追加', 'insertRow')
+      // .addItem('チェック済レコード転記', 'insertRow')
+      // .addItem('実績管理シート更新', 'insertRow')
+      .addToUi();
 }
-
 
 // 新メニュー(Shoさま対応) start
 // 最終行をコピーして行を挿入する関数
-function newInsertRow() {
-  let ui = SpreadsheetApp.getUi();
-
-  // 起動チェック
-  // ui.alert("This is a test message of newInsertRow()")
+function insertRow() {
 
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var lastRow = sheet.getLastRow(); // 最終行を取得します
@@ -26,7 +19,6 @@ function newInsertRow() {
 
   // コピーする行のデータを取得
   var rangeToCopy = sheet.getRange(lastRow, 1, 1, sheet.getLastColumn());
-  var dataToCopy = rangeToCopy.getValues();
 
   // 追加する行数分のループ
   for (var i = 0; i < numCopies; i++) {
@@ -35,8 +27,7 @@ function newInsertRow() {
 
     // 挿入した行にコピーしたデータを貼り付け
     var rangeToPaste = sheet.getRange(lastRow + i + 1, 1, 1, sheet.getLastColumn());
-    rangeToPaste.setValues(dataToCopy);
-
+    rangeToCopy.copyTo(rangeToPaste);
   }
 
   // 追加した分の範囲分、関数の値を拡大する
@@ -52,8 +43,8 @@ function applyArrayFormula() {
 
   // 処理対象の列と対応する計算式
   var formulas = {
-    'AA': '=ARRAYFORMULA(IFERROR(T15:T' + lastRow + ',0))',
-    'AB': '=ARRAYFORMULA(IFERROR(W15:W' + lastRow + '-T15:T' + lastRow + ',0))',
+    'S': '=ARRAYFORMULA(IFERROR(O15:O' + lastRow + ',0))',
+    // 'AB': '=ARRAYFORMULA(IFERROR(W15:W' + lastRow + '-T15:T' + lastRow + ',0))',
     // 他の列と計算式を追加することが可能です
   };
 
