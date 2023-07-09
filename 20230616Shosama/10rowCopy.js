@@ -32,7 +32,7 @@ function insertRow() {
   // 追加した分の範囲分、関数の値を拡大する
   applyArrayFormula();
   // 合計値も拡大する
-  // updateFormulas();
+  updateFormulas();
 
 }
 
@@ -78,17 +78,19 @@ function updateFormulas() {
   // もし最終行が15行以下ならば処理を終了
   if (lastRow < 15) return;
 
-  // H5:H8までに設定する計算式を定義
-  var formulas = [
-    '=SUMIF($D$15:$D$' + lastRow + ', "Amazon", $P$15:$P$' + lastRow + ')',
-    '=SUMIF($D$15:$D$' + lastRow + ', "楽天", $P$15:$P$' + lastRow + ')',
-    '=SUMIF($D$15:$D$' + lastRow + ', "Yahoo", $P$15:$P$' + lastRow + ')',
-    '=SUMIF($D$15:$D$' + lastRow + ', "その他", $P$15:$P$' + lastRow + ')',
-  ];
+  // H5:K8までに設定する計算式を定義
+  var companies = ["Amazon", "楽天", "Yahoo", "その他"];
+  var formulas = companies.map((company) => [
+    '=SUMIF($D$15:$D$' + lastRow + ', "' + company + '", $P$15:$P$' + lastRow + ')',
+    '=SUMIF($D$15:$D$' + lastRow + ', "' + company + '", $J$15:$J$' + lastRow + ')',
+    '=SUMPRODUCT(($D$15:$D$' + lastRow + ' = "' + company + '") * ($P$15:$P$' + lastRow + ' * $Q$15:$Q$' + lastRow + '))'
+  ]);
 
   // 各セルに対応する計算式を設定
   for (var i = 0; i < formulas.length; i++) {
-    sheet.getRange('H' + (i + 5)).setFormula(formulas[i]);
+    ['H', 'J', 'K'].forEach((column, j) => {
+      sheet.getRange(column + (i + 5)).setFormula(formulas[i][j]);
+    });
   }
 }
 
