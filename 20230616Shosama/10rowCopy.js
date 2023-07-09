@@ -4,8 +4,7 @@ function onOpen(e) {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('メニュー')
       .addItem('入力行の追加', 'insertRow')
-      // .addItem('チェック済レコード転記', 'insertRow')
-      // .addItem('実績管理シート更新', 'insertRow')
+      // .addItem('CSV出力', 'outputCSV')
       .addToUi();
 }
 
@@ -32,6 +31,9 @@ function insertRow() {
 
   // 追加した分の範囲分、関数の値を拡大する
   applyArrayFormula();
+  // 合計値も拡大する
+  // updateFormulas();
+
 }
 
 
@@ -43,8 +45,8 @@ function applyArrayFormula() {
 
   // 処理対象の列と対応する計算式
   var formulas = {
-    'S': '=ARRAYFORMULA(IFERROR(O15:O' + lastRow + ',0))',
-    // 'AB': '=ARRAYFORMULA(IFERROR(W15:W' + lastRow + '-T15:T' + lastRow + ',0))',
+    'R' : '=ARRAYFORMULA(IFERROR(P15:P' + lastRow + '-J15:J' + lastRow + ',0))',
+    'P' : '=ARRAYFORMULA(IFERROR(((G15:G' + lastRow + '*I15:I' + lastRow + ')+H15:H' + lastRow + '),0))',
     // 他の列と計算式を追加することが可能です
   };
 
@@ -66,6 +68,28 @@ function setRangeToBlank(sheet, rangeA1Notation) {
   var blankValues = new Array(rows).fill([""]);
 
   rangeToPaste.setValues(blankValues);
+}
+
+// 行の追加に合わせて合計値の範囲を拡大（空白行の追加後にCallすること）
+function updateFormulas() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lastRow = sheet.getLastRow();
+
+  // もし最終行が15行以下ならば処理を終了
+  if (lastRow < 15) return;
+
+  // H5:H8までに設定する計算式を定義
+  var formulas = [
+    '=SUMIF($D$15:$D$' + lastRow + ', "Amazon", $P$15:$P$' + lastRow + ')',
+    '=SUMIF($D$15:$D$' + lastRow + ', "楽天", $P$15:$P$' + lastRow + ')',
+    '=SUMIF($D$15:$D$' + lastRow + ', "Yahoo", $P$15:$P$' + lastRow + ')',
+    '=SUMIF($D$15:$D$' + lastRow + ', "その他", $P$15:$P$' + lastRow + ')',
+  ];
+
+  // 各セルに対応する計算式を設定
+  for (var i = 0; i < formulas.length; i++) {
+    sheet.getRange('H' + (i + 5)).setFormula(formulas[i]);
+  }
 }
 
 // 新メニュー(Shoさま対応) end
