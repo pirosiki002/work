@@ -1,0 +1,40 @@
+// スプレッドシートが開かれたときに行いたい処理
+function onOpen(e) {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('メニュー')
+      .addItem('入力行の追加', 'insertRow')
+      .addItem('CSV出力', 'exportCsv')
+      .addToUi();
+}
+
+function exportCsv() {
+  // CSVデータを作成（最初は空）
+  let csvData = [["", "", "", "", "", "", "", "", "", "", "", "", "", ""]];
+
+  // A1セルに"SKU"、B1セルに"ASIN"、C1セルに"title"、...、N1セルに"delete"を設定
+  csvData[0][0] = "SKU";                                  // A1
+  csvData[0][1] = "ASIN";                                 // B1
+  csvData[0][2] = "title";                                // C1
+  csvData[0][3] = "number";                               // D1
+  csvData[0][4] = "price";                                // E1
+  csvData[0][5] = "cost";                                 // F1
+  csvData[0][6] = "akaji";                                // G1
+  csvData[0][7] = "takene";                               // H1
+  csvData[0][8] = "condition";                            // I1
+  csvData[0][9] = "conditionNote";                        // J1
+  csvData[0][10] = "priceTrace";                          // K1
+  csvData[0][11] = "leadtime";                            // L1
+  csvData[0][12] = "merchant_shipping_group_name";        // M1
+  csvData[0][13] = "delete";                              // N1
+
+  // ここでcsvDataに更にデータを追加できます
+
+  // 2次元配列をCSV形式（文字列）に変換
+  csvData = csvData.map(row => row.join(",")).join("\n");
+
+  // CSVファイルをGoogle Driveに保存
+  var file = DriveApp.createFile("myData.csv", csvData, MimeType.PLAIN_TEXT);
+
+  // ファイルのURLをログに出力
+  Logger.log(file.getUrl());
+}
