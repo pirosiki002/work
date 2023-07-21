@@ -23,7 +23,7 @@ function exportCsv() {
 }
 
 function getInitialCsvData() {
-  return [["SKU", "ASIN", "title", "number", "price", "cost", "akaji", "takene", "condition", "conditionNote", "priceTrace", "leadtime", "merchant_shipping_group_name", "delete"]];
+  return [["SKU", "ASIN", "title", "number", "price", "cost", "akaji", "takane", "condition", "conditionNote", "priceTrace", "leadtime", "merchant_shipping_group_name", "delete"]];
 }
 
 function addDataFromSheet(sheet, csvData) {
