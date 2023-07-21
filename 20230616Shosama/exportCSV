@@ -11,41 +11,44 @@ function onOpen(e) {
 function exportCsv() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
-  // CSVデータを作成（最初は空）
-  let csvData = [["SKU", "ASIN", "title", "number", "price", "cost", "akaji", "takene", "condition", "conditionNote", "priceTrace", "leadtime", "merchant_shipping_group_name", "delete"]];
+  let csvData = getInitialCsvData();
 
-  // 行の処理開始
+  csvData = addDataFromSheet(sheet, csvData);
+
+  var fileName = getFileName();
+
+  var file = DriveApp.createFile(fileName, csvData, MimeType.PLAIN_TEXT);
+
+  Logger.log(file.getUrl());
+}
+
+function getInitialCsvData() {
+  return [["SKU", "ASIN", "title", "number", "price", "cost", "akaji", "takene", "condition", "conditionNote", "priceTrace", "leadtime", "merchant_shipping_group_name", "delete"]];
+}
+
+function addDataFromSheet(sheet, csvData) {
   var i = 15;
   while(true) {
     var date = sheet.getRange("C" + i).getValue();
-    if(date == "") break; // C列が空なら終了
+    if(date == "") break;
 
-    var number = sheet.getRange("I" + i).getValue(); // I列（数量）をコピー
-    var asin = sheet.getRange("L" + i).getValue(); // L列（ASIN）をコピー
-    var price = sheet.getRange("U" + i).getValue(); // U列（販売単価）をコピー
+    var number = sheet.getRange("I" + i).getValue();
+    var asin = sheet.getRange("L" + i).getValue();
+    var price = sheet.getRange("U" + i).getValue();
 
-    // 2列目からデータを追加
     csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
 
     i++;
   }
 
-  // 2次元配列をCSV形式（文字列）に変換
-  csvData = csvData.map(row => row.join(",")).join("\n");
+  return csvData.map(row => row.join(",")).join("\n");
+}
 
-  // 現在の日付を取得
+function getFileName() {
   var now = new Date();
-  var year = now.getFullYear().toString().substr(-2); // 年の下2桁
-  var month = ('0' + (now.getMonth() + 1)).slice(-2); // 月（2桁になるように0を付加）
-  var day = ('0' + now.getDate()).slice(-2); // 日（2桁になるように0を付加）
+  var year = now.getFullYear().toString().substr(-2);
+  var month = ('0' + (now.getMonth() + 1)).slice(-2);
+  var day = ('0' + now.getDate()).slice(-2);
 
-  // ファイル名に日付を追加
-  var fileName = year + month + day + "myData.csv";
-
-  // CSVファイルをGoogle Driveに保存
-  var file = DriveApp.createFile(fileName, csvData, MimeType.PLAIN_TEXT);
-  // var file = DriveApp.createFile("myData.csv", csvData, MimeType.PLAIN_TEXT);
-
-  // ファイルのURLをログに出力
-  Logger.log(file.getUrl());
+  return year + month + day + "myData.csv";
 }
