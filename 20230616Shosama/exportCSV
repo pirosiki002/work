@@ -36,6 +36,11 @@ function addDataFromSheet(sheet, csvData) {
     var asin = sheet.getRange("L" + i).getValue();
     var price = sheet.getRange("U" + i).getValue();
 
+    // 数量または販売単価が空白だったらエラーメッセージを出力（処理は続行）
+    if (number == "" || price == "") {
+      Browser.msgBox('エラーが発生しました' + i + '行目の数量または販売価格が空白です');
+    }
+
     csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
 
     i++;
@@ -46,9 +51,11 @@ function addDataFromSheet(sheet, csvData) {
 
 function getFileName() {
   var now = new Date();
-  var year = now.getFullYear().toString().substr(-2);
+  var year = now.getFullYear().toString().substr(-2); 
   var month = ('0' + (now.getMonth() + 1)).slice(-2);
-  var day = ('0' + now.getDate()).slice(-2);
+  var day = ('0' + now.getDate()).slice(-2); 
+  var hour = ('0' + now.getHours()).slice(-2); 
+  var minute = ('0' + now.getMinutes()).slice(-2); 
 
-  return year + month + day + "myData.csv";
+  return year + month + day + "_" + hour + minute + "myData.csv";
 }
