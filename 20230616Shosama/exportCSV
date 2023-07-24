@@ -30,25 +30,38 @@ function addDataFromSheet(sheet, csvData) {
   var i = 15;
   while(true) {
     var date = sheet.getRange("C" + i).getValue();
-    if(date == "") break;
+    if(date == "") break; 
 
-    var number = sheet.getRange("I" + i).getValue();
-    var asin = sheet.getRange("L" + i).getValue();
-    var price = sheet.getRange("U" + i).getValue();
+    var number = sheet.getRange("I" + i).getValue(); 
+    var asin = sheet.getRange("L" + i).getValue(); 
+    var price = sheet.getRange("U" + i).getValue(); 
 
     // 数量または販売単価が空白だったらエラーメッセージを出力（処理は続行）
     if (number == "" || price == "") {
       Browser.msgBox('エラーが発生しました' + i + '行目の数量または販売価格が空白です');
     }
-
-    csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
-
+    else{
+      processRow(csvData, asin, number, price);
+    }
     i++;
   }
 
   return csvData.map(row => row.join(",")).join("\n");
 }
 
+function processRow(csvData, asin, number, price) {
+
+  // ASINが空白でない場合にのみ、以前の行に同じASINがあるか検索
+  var found = asin ? csvData.find(row => row[1] == asin && row[4] == price) : null;
+
+  if(found) {
+    // ASINが存在する場合、数量を更新
+    found[3] += number;
+  } else {
+    // ASINが存在しない場合、新たにデータを追加（ASINが空白の場合もこちらを通る）
+    csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
+  }
+}
 function getFileName() {
   var now = new Date();
   var year = now.getFullYear().toString().substr(-2); 
