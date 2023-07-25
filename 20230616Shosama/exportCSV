@@ -11,15 +11,18 @@ function onOpen(e) {
 function exportCsv() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
+  var sheetName = sheet.getName();
+
   let csvData = getInitialCsvData();
 
   csvData = addDataFromSheet(sheet, csvData);
 
-  var fileName = getFileName();
+  var fileName = getDayTime() + "_" + sheetName  + ".csv";
 
   var file = DriveApp.createFile(fileName, csvData, MimeType.PLAIN_TEXT);
 
   Logger.log(file.getUrl());
+  Browser.msgBox("CSVの出力が完了しました");
 }
 
 function getInitialCsvData() {
@@ -61,7 +64,7 @@ function processRow(csvData, asin, number, price, rowNum) {
     } else {
       // 価格が異なる場合、エラーメッセージを出力
       // Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の価格が異なります。');
-      Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の価格が異なります。元の価格は' + found[4] + '円、新しい価格は' + price + '円です。');
+      Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の販売価格が異なります。元の価格は' + found[4] + '円、新しい価格は' + price + '円です。');
     }
   }
 
@@ -71,13 +74,13 @@ function processRow(csvData, asin, number, price, rowNum) {
   }
 }
 
-function getFileName() {
+function getDayTime() {
   var now = new Date();
-  var year = now.getFullYear().toString().substr(-2); 
+  var year = now.getFullYear().toString().substr(-2);
   var month = ('0' + (now.getMonth() + 1)).slice(-2);
-  var day = ('0' + now.getDate()).slice(-2); 
-  var hour = ('0' + now.getHours()).slice(-2); 
-  var minute = ('0' + now.getMinutes()).slice(-2); 
+  var day = ('0' + now.getDate()).slice(-2);
+  var hour = ('0' + now.getHours()).slice(-2);
+  var minute = ('0' + now.getMinutes()).slice(-2);
 
-  return year + month + day + "_" + hour + minute + "myData.csv";
+  return year + month + day + "_" + hour + minute;
 }
