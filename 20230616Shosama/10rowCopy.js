@@ -1,14 +1,12 @@
-
 // スプレッドシートが開かれたときに行いたい処理
 function onOpen(e) {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('メニュー')
       .addItem('入力行の追加', 'insertRow')
-      // .addItem('CSV出力', 'outputCSV')
+      .addItem('CSV出力', 'exportCsv')
       .addToUi();
 }
 
-// 新メニュー(Shoさま対応) start
 // 最終行をコピーして行を挿入する関数
 function insertRow() {
 
@@ -45,7 +43,7 @@ function applyArrayFormula() {
 
   // 処理対象の列と対応する計算式
   var formulas = {
-    'R' : '=ARRAYFORMULA(IFERROR(P15:P' + lastRow + '-J15:J' + lastRow + ',0))',
+    'R' : '=ARRAYFORMULA(IFERROR(P15:P' + lastRow + '-(J15:J' + lastRow + '+K15:K' + lastRow + '),0))',
     'P' : '=ARRAYFORMULA(IFERROR(((G15:G' + lastRow + '*I15:I' + lastRow + ')+H15:H' + lastRow + '),0))',
     // 他の列と計算式を追加することが可能です
   };
@@ -74,17 +72,19 @@ function setRangeToBlank(sheet, rangeA1Notation) {
 function updateFormulas() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var lastRow = sheet.getLastRow();
-
+  
   // もし最終行が15行以下ならば処理を終了
   if (lastRow < 15) return;
-
+  
   // H5:K8までに設定する計算式を定義
   var companies = ["Amazon", "楽天", "Yahoo", "その他"];
+
   var formulas = companies.map((company) => [
     '=SUMIF($D$15:$D$' + lastRow + ', "' + company + '", $P$15:$P$' + lastRow + ')',
-    '=SUMIF($D$15:$D$' + lastRow + ', "' + company + '", $J$15:$J$' + lastRow + ')',
+    '=ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ', "'  + company + '", $J$15:$J$' + lastRow + ')) + ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ',"' + company + '", $K$15:$K$'+ lastRow + '))',
     '=SUMPRODUCT(($D$15:$D$' + lastRow + ' = "' + company + '") * ($P$15:$P$' + lastRow + ' * $Q$15:$Q$' + lastRow + '))'
   ]);
+
 
   // 各セルに対応する計算式を設定
   for (var i = 0; i < formulas.length; i++) {
@@ -93,5 +93,3 @@ function updateFormulas() {
     });
   }
 }
-
-// 新メニュー(Shoさま対応) end
