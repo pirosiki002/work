@@ -33,11 +33,11 @@ function addDataFromSheet(sheet, csvData) {
   var i = 15;
   while(true) {
     var date = sheet.getRange("C" + i).getValue();
-    if(date == "") break;
+    if(date == "") break; 
 
-    var number = sheet.getRange("I" + i).getValue();
-    var asin = sheet.getRange("L" + i).getValue();
-    var price = sheet.getRange("U" + i).getValue();
+    var number = sheet.getRange("I" + i).getValue(); 
+    var asin = sheet.getRange("L" + i).getValue(); 
+    var price = sheet.getRange("U" + i).getValue(); 
 
     // 数量または販売単価が空白だったらエラーメッセージを出力（処理は続行）
     if (number == "" || price == "") {
@@ -70,17 +70,18 @@ function processRow(csvData, asin, number, price, rowNum) {
 
   // ASINが存在しない場合、または価格が異なる場合、新たにデータを追加
   if (!found || found[4] != price) {
-    csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
+    // csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
+    csvData.push(["", asin, "", number, price, "", "", "", "11", "", "1", "", "", ""]);
   }
 }
 
 function getDayTime() {
   var now = new Date();
-  var year = now.getFullYear().toString().substr(-2);
+  var year = now.getFullYear().toString().substr(-2); 
   var month = ('0' + (now.getMonth() + 1)).slice(-2);
-  var day = ('0' + now.getDate()).slice(-2);
-  var hour = ('0' + now.getHours()).slice(-2);
-  var minute = ('0' + now.getMinutes()).slice(-2);
+  var day = ('0' + now.getDate()).slice(-2); 
+  var hour = ('0' + now.getHours()).slice(-2); 
+  var minute = ('0' + now.getMinutes()).slice(-2); 
 
   return year + month + day + "_" + hour + minute;
 }
