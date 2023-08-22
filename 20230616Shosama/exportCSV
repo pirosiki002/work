@@ -35,17 +35,18 @@ function addDataFromSheet(sheet, csvData) {
     var date = sheet.getRange("C" + i).getValue();
     if(date == "") break; 
 
-    var number = sheet.getRange("I" + i).getValue(); 
-    var asin = sheet.getRange("L" + i).getValue(); 
-    var price = sheet.getRange("U" + i).getValue(); 
+    var number  = sheet.getRange("U" + i).getValue();    // 販売個数をnumberとする 
+    var asin    = sheet.getRange("L" + i).getValue(); 
+    var price   = sheet.getRange("V" + i).getValue(); 
+    var pcprice = (sheet.getRange("R" + i).getValue());  // ポイント、クーポン使用後購入額
+    var cost    = pcprice / number;                      // コスト＝P&C使用後購入額÷販売個数
 
-    // 数量または販売単価が空白だったらエラーメッセージを出力（処理は続行）
-    if (number == "" || price == "") {
-      Browser.msgBox('エラーが発生しました' + i + '行目の数量または販売価格が空白です');
+    // 必須項目が空白だったらエラーメッセージを出力（処理は続行）
+    if (number == "" || price == "" || cost == "") {
+      Browser.msgBox('エラーが発生しました' + i + '行目の必須項目に空白があります');
     }
     else{
-      // processRow(csvData, asin, number, price);
-      processRow(csvData, asin, number, price, i);
+      processRow(csvData, asin, number, price, pcprice, cost, i);
     }
     i++;
   }
@@ -53,25 +54,36 @@ function addDataFromSheet(sheet, csvData) {
   return csvData.map(row => row.join(",")).join("\n");
 }
 
-function processRow(csvData, asin, number, price, rowNum) {
+function processRow(csvData, asin, number, price, pcprice, cost, rowNum) {
   // ASINが空白でない場合にのみ、以前の行に同じASINがあるか検索
   var found = asin ? csvData.find(row => row[1] == asin) : null;
 
   if(found) {
-    // 価格が同じ場合、数量を追加
+    // 価格が同じ場合、数量を追加。また、costも再計算する。
     if (found[4] == price) {
+      // costの計算はややこしいため、関数化したい
+      // ひとつめのcostを求める
+      let beforeTotalCost;
+      beforeTotalCost = found[3] * found[5];
+
+      // 数量を追加
       found[3] += number;
+
+      // costの計算はややこしいため、関数化したい
+      // 現在のcostを求める
+      found[5] = (beforeTotalCost + pcprice) / (found[3]);
+      // 小数点以下切り捨て
+      found[5] = Math.floor(found[5]);
+
     } else {
       // 価格が異なる場合、エラーメッセージを出力
-      // Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の価格が異なります。');
       Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の販売価格が異なります。元の価格は' + found[4] + '円、新しい価格は' + price + '円です。');
     }
   }
 
   // ASINが存在しない場合、または価格が異なる場合、新たにデータを追加
   if (!found || found[4] != price) {
-    // csvData.push(["", asin, "", number, price, "", "", "", "11", "", "", "", "", ""]);
-    csvData.push(["", asin, "", number, price, "", "", "", "11", "", "1", "", "", ""]);
+    csvData.push(["", asin, "", number, price, cost, "", "", "11", "", "1", "", "", ""]);
   }
 }
 
@@ -85,3 +97,5 @@ function getDayTime() {
 
   return year + month + day + "_" + hour + minute;
 }
+
+// 新メニュー(Shoさま対応) end
