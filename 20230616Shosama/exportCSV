@@ -7,52 +7,53 @@ function onOpen(e) {
       .addToUi();
 }
 
-// CSV出力関数
+// CSV出力
 function exportCsv() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
   var sheetName = sheet.getName();
-
   let csvData = getInitialCsvData();
+  var i = 15;
 
-  csvData = addDataFromSheet(sheet, csvData);
+  while(true) {
+    var date = sheet.getRange("C" + i).getValue();
+    if(date == "") break;
 
-  var fileName = getDayTime() + "_" + sheetName  + ".csv";
+    var isChecked = sheet.getRange("B" + i).getValue();
 
-  var file = DriveApp.createFile(fileName, csvData, MimeType.PLAIN_TEXT);
+    if(isChecked) {
+      addDataFromSheet(sheet, csvData, i);
+      sheet.getRange("A" + i).setValue('済');    // 済とマークする
+      sheet.getRange("B" + i).setValue(false);   // チェックボックスをOFFにする
+    }
+    i++;
+  }
 
+  var fileName = getDayTime() + "_" + sheetName + ".csv";
+  var file = DriveApp.createFile(fileName, csvData.join("\n"), MimeType.PLAIN_TEXT);
   Logger.log(file.getUrl());
   Browser.msgBox("CSVの出力が完了しました");
 }
+
+function addDataFromSheet(sheet, csvData, i) {
+  var number  = sheet.getRange("U" + i).getValue();
+  var asin    = sheet.getRange("L" + i).getValue();
+  var price   = sheet.getRange("V" + i).getValue();
+  var pcprice = (sheet.getRange("R" + i).getValue());
+
+  var cost    = pcprice / number;
+  if (number == "" || price == "" || cost == "") {
+    Browser.msgBox('エラーが発生しました' + i + '行目の必須項目に空白があります');
+  }
+  else{
+    processRow(csvData, asin, number, price, pcprice, cost, i);
+  }
+}
+
 
 function getInitialCsvData() {
   return [["SKU", "ASIN", "title", "number", "price", "cost", "akaji", "takane", "condition", "conditionNote", "priceTrace", "leadtime", "merchant_shipping_group_name", "delete"]];
 }
 
-function addDataFromSheet(sheet, csvData) {
-  var i = 15;
-  while(true) {
-    var date = sheet.getRange("C" + i).getValue();
-    if(date == "") break; 
-
-    var number  = sheet.getRange("U" + i).getValue();    // 販売個数をnumberとする 
-    var asin    = sheet.getRange("L" + i).getValue(); 
-    var price   = sheet.getRange("V" + i).getValue(); 
-    var pcprice = (sheet.getRange("R" + i).getValue());  // ポイント、クーポン使用後購入額
-    var cost    = pcprice / number;                      // コスト＝P&C使用後購入額÷販売個数
-
-    // 必須項目が空白だったらエラーメッセージを出力（処理は続行）
-    if (number == "" || price == "" || cost == "") {
-      Browser.msgBox('エラーが発生しました' + i + '行目の必須項目に空白があります');
-    }
-    else{
-      processRow(csvData, asin, number, price, pcprice, cost, i);
-    }
-    i++;
-  }
-
-  return csvData.map(row => row.join(",")).join("\n");
-}
 
 function processRow(csvData, asin, number, price, pcprice, cost, rowNum) {
   // ASINが空白でない場合にのみ、以前の行に同じASINがあるか検索
