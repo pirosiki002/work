@@ -1,6 +1,7 @@
+
 // スプレッドシートが開かれたときに行いたい処理
 function onOpen(e) {
-  var ui = SpreadsheetApp.getUi();
+  let ui = SpreadsheetApp.getUi();
   ui.createMenu('メニュー')
       .addItem('入力行の追加', 'insertRow')
       .addItem('CSV出力', 'exportCsv')
@@ -9,16 +10,16 @@ function onOpen(e) {
 
 // CSV出力
 function exportCsv() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var sheetName = sheet.getName();
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  let sheetName = sheet.getName();
   let csvData = getInitialCsvData();
-  var i = 15;
+  let i = 15;
 
   while(true) {
-    var date = sheet.getRange("C" + i).getValue();
+    let date = sheet.getRange("C" + i).getValue();
     if(date == "") break;
 
-    var isChecked = sheet.getRange("B" + i).getValue();
+    let isChecked = sheet.getRange("B" + i).getValue();
 
     if(isChecked) {
       addDataFromSheet(sheet, csvData, i);
@@ -28,19 +29,19 @@ function exportCsv() {
     i++;
   }
 
-  var fileName = getDayTime() + "_" + sheetName + ".csv";
-  var file = DriveApp.createFile(fileName, csvData.join("\n"), MimeType.PLAIN_TEXT);
+  let fileName = getDayTime() + "_" + sheetName + ".csv";
+  let file = DriveApp.createFile(fileName, csvData.join("\n"), MimeType.PLAIN_TEXT);
   Logger.log(file.getUrl());
   Browser.msgBox("CSVの出力が完了しました");
 }
 
 function addDataFromSheet(sheet, csvData, i) {
-  var number  = sheet.getRange("U" + i).getValue();
-  var asin    = sheet.getRange("L" + i).getValue();
-  var price   = sheet.getRange("V" + i).getValue();
-  var pcprice = (sheet.getRange("R" + i).getValue());
+  let number  = sheet.getRange("U" + i).getValue();
+  let asin    = sheet.getRange("L" + i).getValue();
+  let price   = sheet.getRange("V" + i).getValue();
+  let pcprice = (sheet.getRange("R" + i).getValue());
 
-  var cost    = pcprice / number;
+  let cost    = pcprice / number;
   if (number == "" || price == "" || cost == "") {
     Browser.msgBox('エラーが発生しました' + i + '行目の必須項目に空白があります');
   }
@@ -56,45 +57,41 @@ function getInitialCsvData() {
 
 
 function processRow(csvData, asin, number, price, pcprice, cost, rowNum) {
-  // ASINが空白でない場合にのみ、以前の行に同じASINがあるか検索
-  var found = asin ? csvData.find(row => row[1] == asin) : null;
+    let found = asin ? csvData.find(row => row[1] === asin) : null;
 
-  if(found) {
-    // 価格が同じ場合、数量を追加。また、costも再計算する。
-    if (found[4] == price) {
-      // costの計算はややこしいため、関数化したい
-      // ひとつめのcostを求める
-      let beforeTotalCost;
-      beforeTotalCost = found[3] * found[5];
-
-      // 数量を追加
-      found[3] += number;
-
-      // costの計算はややこしいため、関数化したい
-      // 現在のcostを求める
-      found[5] = (beforeTotalCost + pcprice) / (found[3]);
-      // 小数点以下切り捨て
-      found[5] = Math.floor(found[5]);
-
+    if (found) {
+        if (found[4] === price) {
+            updateExistingData(found, number, pcprice);
+        } else {
+            showErrorForDifferentPrice(rowNum, asin, found[4], price);
+            addNewData(csvData, asin, number, price, cost);
+        }
     } else {
-      // 価格が異なる場合、エラーメッセージを出力
-      Browser.msgBox('エラー: ' + rowNum + '行目のASIN (' + asin + ') の販売価格が異なります。元の価格は' + found[4] + '円、新しい価格は' + price + '円です。');
+        addNewData(csvData, asin, number, price, cost);
     }
-  }
+}
 
-  // ASINが存在しない場合、または価格が異なる場合、新たにデータを追加
-  if (!found || found[4] != price) {
+function updateExistingData(row, number, pcprice) {
+    const beforeTotalCost = row[3] * row[5];
+    row[3] += number; // updｓate number
+    row[5] = Math.floor((beforeTotalCost + pcprice) / row[3]); // update cost
+}
+
+function showErrorForDifferentPrice(rowNum, asin, oldPrice, newPrice) {
+    Browser.msgBox(`エラー: ${rowNum}行目のASIN (${asin}) の販売価格が異なります。元の価格は${oldPrice}円、新しい価格は${newPrice}円です。`);
+}
+
+function addNewData(csvData, asin, number, price, cost) {
     csvData.push(["", asin, "", number, price, cost, "", "", "11", "", "1", "", "", ""]);
-  }
 }
 
 function getDayTime() {
-  var now = new Date();
-  var year = now.getFullYear().toString().substr(-2); 
-  var month = ('0' + (now.getMonth() + 1)).slice(-2);
-  var day = ('0' + now.getDate()).slice(-2); 
-  var hour = ('0' + now.getHours()).slice(-2); 
-  var minute = ('0' + now.getMinutes()).slice(-2); 
+  let now = new Date();
+  let year = now.getFullYear().toString().substr(-2); 
+  let month = ('0' + (now.getMonth() + 1)).slice(-2);
+  let day = ('0' + now.getDate()).slice(-2); 
+  let hour = ('0' + now.getHours()).slice(-2); 
+  let minute = ('0' + now.getMinutes()).slice(-2); 
 
   return year + month + day + "_" + hour + minute;
 }
