@@ -73,23 +73,23 @@ function setRangeToBlank(sheet, rangeA1Notation) {
 function updateFormulas() {
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   let lastRow = sheet.getLastRow();
-  
+
   // もし最終行が15行以下ならば処理を終了
   if (lastRow < 15) return;
-  
+
   // H5:K8までに設定する計算式を定義
   let companies = ["Amazon", "楽天", "Yahoo", "その他"];
 
   let formulas = companies.map((company) => [
-    '=SUMIF($D$15:$D$' + lastRow + ', "' + company + '", $P$15:$P$' + lastRow + ')',
-    '=ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ', "'  + company + '", $J$15:$J$' + lastRow + ')) + ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ',"' + company + '", $K$15:$K$'+ lastRow + '))',
+    '=ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ', "'  + company + '", $R$15:$R$' + lastRow + '))',
+    '=ArrayFormula(SUMIF($D$15:$D$'+ lastRow + ', "'  + company + '", $J$15:$J$' + lastRow + '))',
     '=SUMPRODUCT(($D$15:$D$' + lastRow + ' = "' + company + '") * ($P$15:$P$' + lastRow + ' * $Q$15:$Q$' + lastRow + '))'
   ]);
 
 
   // 各セルに対応する計算式を設定
   for (let i = 0; i < formulas.length; i++) {
-    ['H', 'J', 'K'].forEach((column, j) => {
+    ['I','J','K'].forEach((column, j) => {
       sheet.getRange(column + (i + 5)).setFormula(formulas[i][j]);
     });
   }
