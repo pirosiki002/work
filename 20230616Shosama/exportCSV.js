@@ -1,13 +1,3 @@
-
-// スプレッドシートが開かれたときに行いたい処理
-function onOpen(e) {
-  let ui = SpreadsheetApp.getUi();
-  ui.createMenu('メニュー')
-      .addItem('入力行の追加', 'insertRow')
-      .addItem('CSV出力', 'exportCsv')
-      .addToUi();
-}
-
 // CSV出力
 function exportCsv() {
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -17,11 +7,16 @@ function exportCsv() {
 
   while(true) {
     let date = sheet.getRange("C" + i).getValue();
-    if(date == "") break;
+    let status = sheet.getRange("A" + i).getValue();
+
+    // 空の日付であり、かつ"未"や"済"のステータスでもない場合はループを抜ける
+    if(!date && status != "未" && status != "済") {
+      break;
+    }
 
     let isChecked = sheet.getRange("B" + i).getValue();
 
-    if(isChecked) {
+    if(status == "未" && isChecked) {
       addDataFromSheet(sheet, csvData, i);
       sheet.getRange("A" + i).setValue('済');    // 済とマークする
       sheet.getRange("B" + i).setValue(false);   // チェックボックスをOFFにする
@@ -95,5 +90,3 @@ function getDayTime() {
 
   return year + month + day + "_" + hour + minute;
 }
-
-// 新メニュー(Shoさま対応) end
