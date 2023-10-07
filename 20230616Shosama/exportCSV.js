@@ -16,7 +16,7 @@ function exportCsv() {
 
     let isChecked = sheet.getRange("B" + i).getValue();
 
-    if(status == "未" && isChecked) {
+    if(isChecked) {
       addDataFromSheet(sheet, csvData, i);
       sheet.getRange("A" + i).setValue('済');    // 済とマークする
       sheet.getRange("B" + i).setValue(false);   // チェックボックスをOFFにする
@@ -35,10 +35,18 @@ function addDataFromSheet(sheet, csvData, i) {
   let asin    = sheet.getRange("L" + i).getValue();
   let price   = sheet.getRange("V" + i).getValue();
   let pcprice = (sheet.getRange("R" + i).getValue());
+  const pPrice = (sheet.getRange("J" + i).getValue());
+  const cPrice = (sheet.getRange("K" + i).getValue());
 
   let cost    = pcprice / number;
-  if (number == "" || price == "" || cost == "") {
+  if (number == "" || price == "" ) {
     Browser.msgBox('エラーが発生しました' + i + '行目の必須項目に空白があります');
+  }
+  else if (cost == ""){
+    if(cPrice > 0 || pPrice > 0){
+      // Browser.msgBox('現金購入価格は０ですが、ポイントまたはクーポン利用のためCSV出力します。pPrice =' + pPrice + 'cPrice =' + cPrice);
+      processRow(csvData, asin, number, price, pcprice, cost, i);
+    }
   }
   else{
     processRow(csvData, asin, number, price, pcprice, cost, i);
